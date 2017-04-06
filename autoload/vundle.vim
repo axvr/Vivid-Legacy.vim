@@ -1,9 +1,9 @@
 " =============================================================================
-" Name:         <Name-Pending>
+" Name:         Vivid
 " Author:       Alex Vear
-" HomePage:     http://github.com/axvr/Vundle.vim <-- Will change
-" Readme:       http://github.com/axvr/Vundle.vim/blob/master/README.md
-" Version:      0.10.3 <-- May change
+" HomePage:     http://github.com/axvr/Vivid.vim
+" Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
+" Version:      0.10.3
 " =============================================================================
 
 

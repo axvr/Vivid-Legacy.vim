@@ -1,10 +1,10 @@
-# Vundle Fork (Name Pending)
+# Vivid.vim
 
 Things to do:
 
 * [ ] Restructure repository
 * [ ] Restructure files
-* [ ] Rebrand Vundle
+* [ ] Rebrand Vundle fork to Vivid
 * [ ] Rename components
 * [ ] Remove redundant code
 * [ ] Add full Neovim support
@@ -18,6 +18,7 @@ Things to do:
 * [ ] Make a Github 'organisation' for contributers to join & get commit access
 * [ ] Replace old README and vim help menu
 * [ ] Improve the test files from Vundle
+* [ ] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
   * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
   * [x] use preview window for search results
