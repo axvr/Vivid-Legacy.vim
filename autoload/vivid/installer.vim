@@ -531,7 +531,7 @@ func! s:log(str, ...) abort
   for line in lines
     " Trim trailing whitespace
     let entry = substitute(entry_prefix . line, '\m\s\+$', '', '')
-    call add(g:vundle#log, entry)
+    call add(g:vivid#log, entry)
   endfor
   return a:str
 endf
