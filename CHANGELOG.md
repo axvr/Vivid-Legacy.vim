@@ -47,6 +47,7 @@ Leave 3 lines between previous change log item -->
 ## [0.10.3] - 2017-04-06
 
 ### Changed
+* Forked from Vundle/Vundle.vim
 * Restructure of repository and files
 
 

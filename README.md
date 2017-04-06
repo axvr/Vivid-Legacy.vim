@@ -1,4 +1,36 @@
-## [Help Maintain Vundle](https://github.com/VundleVim/Vundle.vim/issues/383)
+# Vundle Fork (Name Pending)
+
+Things to do:
+
+* [ ] Restructure repository
+* [ ] Restructure files
+* [ ] Rebrand Vundle
+* [ ] Rename components
+* [ ] Remove redundant code
+* [ ] Add full Neovim support
+* [ ] Replace and modernise Vundle base
+* [ ] Improve involvement from the community
+* [ ] Speed up and optimise the plugin manager
+* [ ] Fix all of the bug in Vundle base
+* [ ] Improve documentation
+* [ ] Add multi-language support
+* [ ] Disconnect from Vundle upstream
+* [ ] Make a Github 'organisation' for contributers to join & get commit access
+* [ ] Replace old README and vim help menu
+* [ ] Improve the test files from Vundle
+* [ ] Finish what Vundle set out to do:
+  * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
+  * [x] use preview window for search results
+  * [x] Vim documentation
+  * [x] put Vundle in `bundles/` too (will fix Vundle help)
+  * [x] tests
+  * [x] improve error handling
+  * [ ] allow specifying revision/version?
+  * [ ] handle dependencies
+  * [ ] show description in search results
+  * [ ] search by description as well
+  * [ ] make it rock!
+* [ ] And many more things
 
 ## About
 
@@ -38,7 +70,7 @@
 
 2. Set up [Vundle]:
 
-   `$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
+   `$ git clone https://github.com/axvr/Vundle.vim.git ~/.vim/bundle/Vundle.vim`
 
 3. Configure Plugins:
 
