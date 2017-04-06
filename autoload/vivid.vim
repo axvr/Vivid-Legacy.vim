@@ -1,5 +1,5 @@
 " =============================================================================
-" Name:         Vivid
+" Name:         Vivid.vim
 " Author:       Alex Vear
 " HomePage:     http://github.com/axvr/Vivid.vim
 " Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
@@ -9,25 +9,25 @@
 
 " Plugin Commands
 com! -nargs=+  -bar   Plugin
-\ call vundle#config#bundle(<args>)
+\ call vivid#config#bundle(<args>)
 
-com! -nargs=* -bang -complete=custom,vundle#scripts#complete PluginInstall
-\ call vundle#installer#new('!' == '<bang>', <f-args>)
+com! -nargs=* -bang -complete=custom,vivid#scripts#complete PluginInstall
+\ call vivid#installer#new('!' == '<bang>', <f-args>)
 
-com! -nargs=? -bang -complete=custom,vundle#scripts#complete PluginSearch
-\ call vundle#scripts#all('!' == '<bang>', <q-args>)
+com! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
+\ call vivid#scripts#all('!' == '<bang>', <q-args>)
 
 com! -nargs=0 -bang PluginList
-\ call vundle#installer#list('!' == '<bang>')
+\ call vivid#installer#list('!' == '<bang>')
 
 com! -nargs=? -bang   PluginClean
-\ call vundle#installer#clean('!' == '<bang>')
+\ call vivid#installer#clean('!' == '<bang>')
 
 com! -nargs=0         PluginDocs
-\ call vundle#installer#helptags(g:vundle#bundles)
+\ call vivid#installer#helptags(g:vivid#bundles)
 
 " Aliases
-com! -nargs=* -complete=custom,vundle#scripts#complete PluginUpdate PluginInstall! <args>
+com! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
 
 " These will be removed and replaced, they are currently here for reference
 " purposes.
@@ -62,38 +62,38 @@ if (has('signs'))
 endif
 
 
-" Completely remove vundle#rc and replace fully with name#begin
+" Completely remove vivid#rc and replace fully with vivid#begin
 
-" Set up Vundle.  This function has to be called from the users vimrc file.
+" Set up Vivid.  This function has to be called from the users vimrc file.
 " This will force Vim to source this file as a side effect which wil define
 " the :Plugin command.  After calling this function the user can use the
 " :Plugin command in the vimrc.  It is not possible to do this automatically
 " because when loading the vimrc file no plugins where loaded yet.
-func! vundle#rc(...) abort
+func! vivid#rc(...) abort
   if a:0 > 0
-    let g:vundle#bundle_dir = expand(a:1, 1)
+    let g:vivid#bundle_dir = expand(a:1, 1)
   endif
-  call vundle#config#init()
+  call vivid#config#init()
 endf
 
-" Alternative to vundle#rc, offers speed up by modifying rtp (RunTimePath) only when end()
+" Alternative to vivid#rc, offers speed up by modifying rtp (RunTimePath) only when end()
 " called later.
-func! vundle#begin(...) abort
-  let g:vundle#lazy_load = 1
-  call call('vundle#rc', a:000)
+func! vivid#begin(...) abort
+  let g:vivid#lazy_load = 1
+  call call('vivid#rc', a:000)
 endf
 
 " Finishes putting plugins on the rtp.
-func! vundle#end(...) abort
-  unlet g:vundle#lazy_load
-  call vundle#config#activate_bundles()
+func! vivid#end(...) abort
+  unlet g:vivid#lazy_load
+  call vivid#config#activate_bundles()
 endf
 
-" Initialize some global variables used by Vundle.
-let vundle#bundle_dir = expand('$HOME/.vim/bundle', 1)
-let vundle#bundles = []
-let vundle#lazy_load = 0
-let vundle#log = []
-let vundle#updated_bundles = []
+" Initialize some global variables used by Vivid.
+let vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
+let vivid#bundles = []
+let vivid#lazy_load = 0
+let vivid#log = []
+let vivid#updated_bundles = []
 
 " vim: set expandtab sts=2 ts=2 sw=2 tw=78 norl:

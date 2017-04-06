@@ -6,7 +6,7 @@
 " bang -- if 1 refresh the script name cache, if 0 don't
 " ...  -- a plugin name to search for
 " ---------------------------------------------------------------------------
-func! vundle#scripts#all(bang, ...)
+func! vivid#scripts#all(bang, ...)
   let b:match = ''
   let info = ['"Keymap: i - Install plugin; c - Cleanup; s - Search; R - Reload list']
   let matches = s:load_scripts(a:bang)
@@ -16,7 +16,7 @@ func! vundle#scripts#all(bang, ...)
     " TODO: highlight matches
     let b:match = a:1
   endif
-  call vundle#scripts#view('search',info, vundle#scripts#bundle_names(reverse(matches)))
+  call vivid#scripts#view('search',info, vivid#scripts#bundle_names(reverse(matches)))
   redraw
   echo len(matches).' plugins found'
 endf
@@ -25,7 +25,7 @@ endf
 " ---------------------------------------------------------------------------
 " Repeat the search for bundles.
 " ---------------------------------------------------------------------------
-func! vundle#scripts#reload() abort
+func! vivid#scripts#reload() abort
   silent exec ':PluginSearch! '.(exists('b:match') ? b:match : '')
   redraw
 endf
@@ -39,10 +39,10 @@ endf
 "            candidates, or all installed plugin names when running an 'Update
 "            variant'. see also :h command-completion-custom
 " ---------------------------------------------------------------------------
-func! vundle#scripts#complete(a,c,d)
-  if match(a:c, '\v^%(Plugin|Vundle)%(Install!|Update)') == 0
+func! vivid#scripts#complete(a,c,d)
+  if match(a:c, '\v^%(Plugin|Vivid)%(Install!|Update)') == 0
     " Only installed plugins if updating
-    return join(map(copy(g:vundle#bundles), 'v:val.name'), "\n")
+    return join(map(copy(g:vivid#bundles), 'v:val.name'), "\n")
   else
     " Or all known plugins otherwise
     return join(s:load_scripts(0),"\n")
@@ -61,7 +61,7 @@ func! s:view_log()
   if bufloaded(s:log_file)
     execute 'silent bdelete' s:log_file
   endif
-  call writefile(g:vundle#log, s:log_file)
+  call writefile(g:vivid#log, s:log_file)
   execute 'silent pedit ' . s:log_file
   set bufhidden=wipe
   setl buftype=nofile
@@ -78,16 +78,16 @@ endf
 " ---------------------------------------------------------------------------
 func! s:create_changelog() abort
   let changelog = ['Updated Plugins:']
-  for bundle_data in g:vundle#updated_bundles
+  for bundle_data in g:vivid#updated_bundles
     let initial_sha = bundle_data[0]
     let updated_sha = bundle_data[1]
     let bundle      = bundle_data[2]
 
-    let cmd = 'cd '.vundle#installer#shellesc(bundle.path()).
+    let cmd = 'cd '.vivid#installer#shellesc(bundle.path()).
           \              ' && git log --pretty=format:"%s   %an, %ar" --graph '.
           \               initial_sha.'..'.updated_sha
 
-    let cmd = vundle#installer#shellesc_cd(cmd)
+    let cmd = vivid#installer#shellesc_cd(cmd)
 
     let updates = system(cmd)
 
@@ -124,7 +124,7 @@ func! s:view_changelog()
   setl buftype=nofile
   setl noswapfile
   setl ro noma
-  setfiletype vundlelog
+  setfiletype vividlog
 
   wincmd P | wincmd H
 endf
@@ -136,7 +136,7 @@ endf
 " names  -- a list of names (strings) of plugins
 " return -- a list of 'Plugin ...' lines suitable to be written to a buffer
 " ---------------------------------------------------------------------------
-func! vundle#scripts#bundle_names(names)
+func! vivid#scripts#bundle_names(names)
   return map(copy(a:names), ' printf("Plugin ' ."'%s'".'", v:val) ')
 endf
 
@@ -150,12 +150,12 @@ endf
 " results -- the main information to be displayed in the buffer (list of
 "            strings)
 " ---------------------------------------------------------------------------
-func! vundle#scripts#view(title, headers, results)
+func! vivid#scripts#view(title, headers, results)
   if exists('s:view') && bufloaded(s:view)
     exec s:view.'bd!'
   endif
 
-  exec 'silent pedit [Vundle] '.a:title
+  exec 'silent pedit [Vivid] '.a:title
 
   wincmd P | wincmd H
 
@@ -175,27 +175,27 @@ func! vundle#scripts#view(title, headers, results)
   setl nonu ro noma
   if (exists('&relativenumber')) | setl norelativenumber | endif
 
-  setl ft=vundle
+  setl ft=vivid
   setl syntax=vim
   syn keyword vimCommand Plugin
   syn keyword vimCommand Bundle
   syn keyword vimCommand Helptags
 
   com! -buffer -bang -nargs=1 DeletePlugin
-    \ call vundle#installer#run('vundle#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
+    \ call vivid#installer#run('vivid#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
 
   com! -buffer -bang -nargs=? InstallAndRequirePlugin
-    \ call vundle#installer#run('vundle#installer#install_and_require', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
+    \ call vivid#installer#run('vivid#installer#install_and_require', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
   com! -buffer -bang -nargs=? InstallPlugin
-    \ call vundle#installer#run('vundle#installer#install', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
+    \ call vivid#installer#run('vivid#installer#install', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
   com! -buffer -bang -nargs=0 InstallHelptags
-    \ call vundle#installer#run('vundle#installer#docs', 'helptags', [])
+    \ call vivid#installer#run('vivid#installer#docs', 'helptags', [])
 
-  com! -buffer -nargs=0 VundleLog call s:view_log()
+  com! -buffer -nargs=0 VividLog call s:view_log()
 
-  com! -buffer -nargs=0 VundleChangelog call s:view_changelog()
+  com! -buffer -nargs=0 VividChangelog call s:view_changelog()
 
   nnoremap <silent> <buffer> q :silent bd!<CR>
   nnoremap <silent> <buffer> D :exec 'Delete'.getline('.')<CR>
@@ -206,16 +206,16 @@ func! vundle#scripts#view(title, headers, results)
   nnoremap <silent> <buffer> i :exec 'InstallAndRequire'.getline('.')<CR>
   nnoremap <silent> <buffer> I :exec 'InstallAndRequire'.substitute(getline('.'), '^Plugin ', 'Plugin! ', '')<CR>
 
-  nnoremap <silent> <buffer> l :VundleLog<CR>
-  nnoremap <silent> <buffer> u :VundleChangelog<CR>
-  nnoremap <silent> <buffer> h :h vundle<CR>
-  nnoremap <silent> <buffer> ? :h vundle<CR>
+  nnoremap <silent> <buffer> l :VividLog<CR>
+  nnoremap <silent> <buffer> u :VividChangelog<CR>
+  nnoremap <silent> <buffer> h :h vivid<CR>
+  nnoremap <silent> <buffer> ? :h vivid<CR>
 
   nnoremap <silent> <buffer> c :PluginClean<CR>
   nnoremap <silent> <buffer> C :PluginClean!<CR>
 
   nnoremap <buffer> s :PluginSearch
-  nnoremap <silent> <buffer> R :call vundle#scripts#reload()<CR>
+  nnoremap <silent> <buffer> R :call vivid#scripts#reload()<CR>
 
   " goto first line after headers
   exec ':'.(len(a:headers) + 1)
@@ -236,13 +236,13 @@ func! s:fetch_scripts(to)
 
   let l:vim_scripts_json = 'http://vim-scripts.org/api/scripts.json'
   if executable("curl")
-    let cmd = 'curl --fail -s -o '.vundle#installer#shellesc(a:to).' '.l:vim_scripts_json
+    let cmd = 'curl --fail -s -o '.vivid#installer#shellesc(a:to).' '.l:vim_scripts_json
   elseif executable("wget")
-    let temp = vundle#installer#shellesc(tempname())
-    let cmd = 'wget -q -O '.temp.' '.l:vim_scripts_json. ' && mv -f '.temp.' '.vundle#installer#shellesc(a:to)
+    let temp = vivid#installer#shellesc(tempname())
+    let cmd = 'wget -q -O '.temp.' '.l:vim_scripts_json. ' && mv -f '.temp.' '.vivid#installer#shellesc(a:to)
     if (has('win32') || has('win64'))
       let cmd = substitute(cmd, 'mv -f ', 'move /Y ', '') " change force flag
-      let cmd = vundle#installer#shellesc(cmd)
+      let cmd = vivid#installer#shellesc(cmd)
     end
   else
     echoerr 'Error curl or wget is not available!'
@@ -268,7 +268,7 @@ endf
 "           specifications) of all plugins from vim-scripts.org
 " ---------------------------------------------------------------------------
 func! s:load_scripts(bang)
-  let f = expand(g:vundle#bundle_dir.'/.vundle/script-names.vim-scripts.org.json', 1)
+  let f = expand(g:vivid#bundle_dir.'/.vivid/script-names.vim-scripts.org.json', 1)
   if a:bang || !filereadable(f)
     if 0 != s:fetch_scripts(f)
       return []

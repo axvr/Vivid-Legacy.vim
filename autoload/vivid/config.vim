@@ -3,18 +3,18 @@
 "
 " arg    -- a string specifying the plugin
 " ...    -- a dictionary of options for the plugin
-" return -- the return value from vundle#config#init_bundle()
+" return -- the return value from vivid#config#init_bundle()
 " ---------------------------------------------------------------------------
-func! vundle#config#bundle(arg, ...)
-  let bundle = vundle#config#init_bundle(a:arg, a:000)
+func! vivid#config#bundle(arg, ...)
+  let bundle = vivid#config#init_bundle(a:arg, a:000)
   if !s:check_bundle_name(bundle)
     return
   endif
-  if exists('g:vundle#lazy_load') && g:vundle#lazy_load
-    call add(g:vundle#bundles, bundle)
+  if exists('g:vivid#lazy_load') && g:vivid#lazy_load
+    call add(g:vivid#bundles, bundle)
   else
-    call s:rtp_rm_a()
-    call add(g:vundle#bundles, bundle)
+    call s:rtp_rm_a( )
+    call add(g:vivid#bundles, bundle)
     call s:rtp_add_a()
     call s:rtp_add_defaults()
   endif
@@ -26,23 +26,23 @@ endf
 "  When lazy bundle load is used (begin/end functions), add all configured
 "  bundles to runtimepath and reorder appropriately.
 " ---------------------------------------------------------------------------
-func! vundle#config#activate_bundles()
+func! vivid#config#activate_bundles()
   call s:rtp_add_a()
   call s:rtp_add_defaults()
 endf
 
 
 " ---------------------------------------------------------------------------
-" Initialize Vundle.
+" Initialize Vivid.
 "
 " Start a new bundles list and make sure the runtimepath does not contain
 " directories from a previous call. In theory, this should only be called
 " once.
 " ---------------------------------------------------------------------------
-func! vundle#config#init()
-  if !exists('g:vundle#bundles') | let g:vundle#bundles = [] | endif
+func! vivid#config#init()
+  if !exists('g:vivid#bundles') | let g:vivid#bundles = [] | endif
   call s:rtp_rm_a()
-  let g:vundle#bundles = []
+  let g:vivid#bundles = []
   let s:bundle_names = {}
 endf
 
@@ -52,14 +52,14 @@ endf
 "
 " bundles -- a list of bundle objects
 " ---------------------------------------------------------------------------
-func! vundle#config#require(bundles) abort
+func! vivid#config#require(bundles) abort
   for b in a:bundles
     call s:rtp_add(b.rtpath)
-    call s:rtp_add(g:vundle#bundle_dir)
+    call s:rtp_add(g:vivid#bundle_dir)
     " TODO: it has to be relative rtpath, not bundle.name
     exec 'runtime! '.b.name.'/plugin/*.vim'
     exec 'runtime! '.b.name.'/after/*.vim'
-    call s:rtp_rm(g:vundle#bundle_dir)
+    call s:rtp_rm(g:vivid#bundle_dir)
   endfor
   call s:rtp_add_defaults()
 endf
@@ -72,7 +72,7 @@ endf
 " opts   -- the options dictionary from then bundle definition
 " return -- an initialized bundle object
 " ---------------------------------------------------------------------------
-func! vundle#config#init_bundle(name, opts)
+func! vivid#config#init_bundle(name, opts)
   if a:name != substitute(a:name, '^\s*\(.\{-}\)\s*$', '\1', '')
     echo "Spurious leading and/or trailing whitespace found in plugin spec '" . a:name . "'"
   endif
@@ -92,7 +92,7 @@ endf
 " ---------------------------------------------------------------------------
 funct! s:check_bundle_name(bundle)
   if has_key(s:bundle_names, a:bundle.name)
-    echoerr 'Vundle error: Name collision for Plugin ' . a:bundle.name_spec .
+    echoerr 'Vivid error: Name collision for Plugin ' . a:bundle.name_spec .
           \ '. Plugin ' . s:bundle_names[a:bundle.name] .
           \ ' previously used the name "' . a:bundle.name . '"' .
           \ '. Skipping Plugin ' . a:bundle.name_spec . '.'
@@ -108,7 +108,7 @@ endf
 
 " ---------------------------------------------------------------------------
 " Parse the options which can be supplied with the bundle specification.
-" Corresponding documentation: vundle-plugins-configure
+" Corresponding documentation: vivid-plugins-configure
 "
 " opts   -- a dictionary with the user supplied options for the bundle
 " return -- a dictionary with the user supplied options for the bundle, this
@@ -128,7 +128,7 @@ endf
 
 " ---------------------------------------------------------------------------
 " Parse the plugin specification.  Corresponding documentation:
-" vundle-plugins-uris
+" vivid-plugins-uris
 "
 " arg    -- the string supplied to identify the plugin
 " return -- a dictionary with the folder name (key 'name') and the uri (key
@@ -137,7 +137,7 @@ endf
 " ---------------------------------------------------------------------------
 func! s:parse_name(arg)
   let arg = a:arg
-  let git_proto = exists('g:vundle_default_git_proto') ? g:vundle_default_git_proto : 'https'
+  let git_proto = exists('g:vivid_default_git_proto') ? g:vivid_default_git_proto : 'https'
 
   if    arg =~? '^\s*\(gh\|github\):\S\+'
   \  || arg =~? '^[a-z0-9][a-z0-9-]*/[^/]\+$'
@@ -179,11 +179,11 @@ endf
 
 
 " ---------------------------------------------------------------------------
-" Remove all paths for the plugins which are managed by Vundle from the
+" Remove all paths for the plugins which are managed by Vivid from the
 " runtimepath.
 " ---------------------------------------------------------------------------
 func! s:rtp_rm_a()
-  let paths = map(copy(g:vundle#bundles), 'v:val.rtpath')
+  let paths = map(copy(g:vivid#bundles), 'v:val.rtpath')
   let prepends = join(paths, ',')
   let appends = join(paths, '/after,').'/after'
   exec 'set rtp-='.fnameescape(prepends)
@@ -192,11 +192,11 @@ endf
 
 
 " ---------------------------------------------------------------------------
-" Add all paths for the plugins which are managed by Vundle to the
+" Add all paths for the plugins which are managed by Vivid to the
 " runtimepath.
 " ---------------------------------------------------------------------------
 func! s:rtp_add_a()
-  let paths = map(copy(g:vundle#bundles), 'v:val.rtpath')
+  let paths = map(copy(g:vivid#bundles), 'v:val.rtpath')
   let prepends = join(paths, ',')
   let appends = join(paths, '/after,').'/after'
   exec 'set rtp^='.fnameescape(prepends)
@@ -242,7 +242,7 @@ endf
 " ---------------------------------------------------------------------------
 " Find the actual path inside a bundle directory to be added to the
 " runtimepath.  It might be provided by the user with the 'rtp' option.
-" Corresponding documentation: vundle-plugins-configure
+" Corresponding documentation: vivid-plugins-configure
 "
 " opts   -- a bundle dict
 " return -- expanded path to the corresponding plugin directory
@@ -265,7 +265,7 @@ let s:bundle = {}
 " return -- the target location to clone this bundle to
 " ---------------------------------------------------------------------------
 func! s:bundle.path()
-  return s:expand_path(g:vundle#bundle_dir.'/') . self.name
+  return s:expand_path(g:vivid#bundle_dir.'/') . self.name
 endf
 
 

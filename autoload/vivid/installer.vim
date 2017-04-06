@@ -1,21 +1,21 @@
 " ---------------------------------------------------------------------------
-" Try to clone all new bundles given (or all bundles in g:vundle#bundles by
-" default) to g:vundle#bundle_dir.  If a:bang is 1 it will also update all
+" Try to clone all new bundles given (or all bundles in g:vivid#bundles by
+" default) to g:vivid#bundle_dir.  If a:bang is 1 it will also update all
 " plugins (git pull).
 "
 " bang   -- 1 or 0
 " ...    -- any number of bundle specifications (separate arguments)
 " ---------------------------------------------------------------------------
-func! vundle#installer#new(bang, ...) abort
+func! vivid#installer#new(bang, ...) abort
   " No specific plugins are specified. Operate on all plugins.
   if a:0 == 0
-    let bundles = g:vundle#bundles
+    let bundles = g:vivid#bundles
   " Specific plugins are specified for update. Update them.
   elseif (a:bang)
-    let bundles = filter(copy(g:vundle#bundles), 'index(a:000, v:val.name) > -1')
+    let bundles = filter(copy(g:vivid#bundles), 'index(a:000, v:val.name) > -1')
   " Specific plugins are specified for installation. Install them.
   else
-    let bundles = map(copy(a:000), 'vundle#config#bundle(v:val, {})')
+    let bundles = map(copy(a:000), 'vivid#config#bundle(v:val, {})')
   endif
 
   if empty(bundles)
@@ -23,21 +23,21 @@ func! vundle#installer#new(bang, ...) abort
     return
   endif
 
-  let names = vundle#scripts#bundle_names(map(copy(bundles), 'v:val.name_spec'))
-  call vundle#scripts#view('Installer',['" Installing plugins to '.expand(g:vundle#bundle_dir, 1)], names +  ['Helptags'])
+  let names = vivid#scripts#bundle_names(map(copy(bundles), 'v:val.name_spec'))
+  call vivid#scripts#view('Installer',['" Installing plugins to '.expand(g:vivid#bundle_dir, 1)], names +  ['Helptags'])
 
   " This calls 'add' as a normal mode command. This is a buffer local mapping
-  " defined in vundle#scripts#view(). The mapping will call a buffer local
-  " command InstallPlugin which in turn will call vundle#installer#run() with
-  " vundle#installer#install().
+  " defined in vivid#scripts#view(). The mapping will call a buffer local
+  " command InstallPlugin which in turn will call vivid#installer#run() with
+  " vivid#installer#install().
   call s:process(a:bang, (a:bang ? 'add!' : 'add'))
 
-  call vundle#config#require(bundles)
+  call vivid#config#require(bundles)
 endf
 
 
 " ---------------------------------------------------------------------------
-" Iterate over all lines in a Vundle window and execute the given command for
+" Iterate over all lines in a Vivid window and execute the given command for
 " every line.  Used by the installation and cleaning functions.
 "
 " bang   -- not used (FIXME)
@@ -76,7 +76,7 @@ endf
 
 
 " ---------------------------------------------------------------------------
-" Call another function in the different Vundle windows.
+" Call another function in the different Vivid windows.
 "
 " func_name -- the function to call
 " name      -- the bundle name to call func_name for (string)
@@ -84,7 +84,7 @@ endf
 "              optional argument will be used)
 " return    -- the status returned by the call to func_name
 " ---------------------------------------------------------------------------
-func! vundle#installer#run(func_name, name, ...) abort
+func! vivid#installer#run(func_name, name, ...) abort
   let n = a:name
 
   echo 'Processing '.n
@@ -143,15 +143,15 @@ endf
 " ---------------------------------------------------------------------------
 " Install a plugin, then add it to the runtimepath and source it.
 "
-" bang   -- 1 or 0, passed directly to vundle#installer#install()
+" bang   -- 1 or 0, passed directly to vivid#installer#install()
 " name   -- the name of a bundle (string)
-" return -- the return value from vundle#installer#install()
+" return -- the return value from vivid#installer#install()
 " ---------------------------------------------------------------------------
-func! vundle#installer#install_and_require(bang, name) abort
-  let result = vundle#installer#install(a:bang, a:name)
-  let b = vundle#config#bundle(a:name, {})
-  call vundle#installer#helptags([b])
-  call vundle#config#require([b])
+func! vivid#installer#install_and_require(bang, name) abort
+  let result = vivid#installer#install(a:bang, a:name)
+  let b = vivid#config#bundle(a:name, {})
+  call vivid#installer#helptags([b])
+  call vivid#config#require([b])
   return result
 endf
 
@@ -163,16 +163,16 @@ endf
 " name   -- the name of a bundle (string)
 " return -- the return value from s:sync()
 " ---------------------------------------------------------------------------
-func! vundle#installer#install(bang, name) abort
-  if !isdirectory(g:vundle#bundle_dir) | call mkdir(g:vundle#bundle_dir, 'p') | endif
+func! vivid#installer#install(bang, name) abort
+  if !isdirectory(g:vivid#bundle_dir) | call mkdir(g:vivid#bundle_dir, 'p') | endif
 
   let n = substitute(a:name,"['".'"]\+','','g')
-  let matched = filter(copy(g:vundle#bundles), 'v:val.name_spec == n')
+  let matched = filter(copy(g:vivid#bundles), 'v:val.name_spec == n')
 
   if len(matched) > 0
     let b = matched[0]
   else
-    let b = vundle#config#init_bundle(a:name, {})
+    let b = vivid#config#init_bundle(a:name, {})
   endif
 
   return s:sync(a:bang, b)
@@ -180,12 +180,12 @@ endf
 
 
 " ---------------------------------------------------------------------------
-" Call :helptags for all bundles in g:vundle#bundles.
+" Call :helptags for all bundles in g:vivid#bundles.
 "
 " return -- 'error' if an error occurred, else return 'helptags'
 " ---------------------------------------------------------------------------
-func! vundle#installer#docs() abort
-  let error_count = vundle#installer#helptags(g:vundle#bundles)
+func! vivid#installer#docs() abort
+  let error_count = vivid#installer#helptags(g:vivid#bundles)
   if error_count > 0
       return 'error'
   endif
@@ -200,7 +200,7 @@ endf
 "            called.
 " return  -- the number of directories where :helptags failed
 " ---------------------------------------------------------------------------
-func! vundle#installer#helptags(bundles) abort
+func! vivid#installer#helptags(bundles) abort
   let bundle_dirs = map(copy(a:bundles),'v:val.rtpath')
   let help_dirs = filter(bundle_dirs, 's:has_doc(v:val)')
 
@@ -218,15 +218,15 @@ endf
 
 " ---------------------------------------------------------------------------
 " List all installed plugins.
-" Corresponding documentation: vundle-plugins-list
+" Corresponding documentation: vivid-plugins-list
 "
 " bang   -- not used
 " ---------------------------------------------------------------------------
-func! vundle#installer#list(bang) abort
-  let bundles = vundle#scripts#bundle_names(map(copy(g:vundle#bundles), 'v:val.name_spec'))
-  call vundle#scripts#view('list', ['" My Plugins'], bundles)
+func! vivid#installer#list(bang) abort
+  let bundles = vivid#scripts#bundle_names(map(copy(g:vivid#bundles), 'v:val.name_spec'))
+  call vivid#scripts#view('list', ['" My Plugins'], bundles)
   redraw
-  echo len(g:vundle#bundles).' plugins configured'
+  echo len(g:vivid#bundles).' plugins configured'
 endf
 
 
@@ -237,11 +237,11 @@ endf
 " bang   -- 0 if the user should be asked to confirm every deletion, 1 if they
 "           should be removed unconditionally
 " ---------------------------------------------------------------------------
-func! vundle#installer#clean(bang) abort
-  let bundle_dirs = map(copy(g:vundle#bundles), 'v:val.path()')
+func! vivid#installer#clean(bang) abort
+  let bundle_dirs = map(copy(g:vivid#bundles), 'v:val.path()')
   let all_dirs = (v:version > 702 || (v:version == 702 && has("patch51")))
-  \   ? split(globpath(g:vundle#bundle_dir, '*', 1), "\n")
-  \   : split(globpath(g:vundle#bundle_dir, '*'), "\n")
+  \   ? split(globpath(g:vivid#bundle_dir, '*', 1), "\n")
+  \   : split(globpath(g:vivid#bundle_dir, '*'), "\n")
   let x_dirs = filter(all_dirs, '0 > index(bundle_dirs, v:val)')
 
   if empty(x_dirs)
@@ -249,10 +249,10 @@ func! vundle#installer#clean(bang) abort
     let names = []
   else
     let headers = ['" Removing Plugins:']
-    let names = vundle#scripts#bundle_names(map(copy(x_dirs), 'fnamemodify(v:val, ":t")'))
+    let names = vivid#scripts#bundle_names(map(copy(x_dirs), 'fnamemodify(v:val, ":t")'))
   end
 
-  call vundle#scripts#view('clean', headers, names)
+  call vivid#scripts#view('clean', headers, names)
   redraw
 
   if (a:bang || empty(names))
@@ -276,14 +276,14 @@ endf
 " return   -- 'error' if an error occurred, 'deleted' if the plugin folder was
 "             successfully deleted
 " ---------------------------------------------------------------------------
-func! vundle#installer#delete(bang, dir_name) abort
+func! vivid#installer#delete(bang, dir_name) abort
 
   let cmd = ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh'))) ?
   \           'rmdir /S /Q' :
   \           'rm -rf'
 
-  let bundle = vundle#config#init_bundle(a:dir_name, {})
-  let cmd .= ' '.vundle#installer#shellesc(bundle.path())
+  let bundle = vivid#config#init_bundle(a:dir_name, {})
+  let cmd .= ' '.vivid#installer#shellesc(bundle.path())
 
   let out = s:system(cmd)
 
@@ -343,8 +343,8 @@ endf
 " return -- the URL for the origin remote (string)
 " ---------------------------------------------------------------------------
 func! s:get_current_origin_url(bundle) abort
-  let cmd = 'cd '.vundle#installer#shellesc(a:bundle.path()).' && git config --get remote.origin.url'
-  let cmd = vundle#installer#shellesc_cd(cmd)
+  let cmd = 'cd '.vivid#installer#shellesc(a:bundle.path()).' && git config --get remote.origin.url'
+  let cmd = vivid#installer#shellesc_cd(cmd)
   let out = s:strip(s:system(cmd))
   return out
 endf
@@ -357,8 +357,8 @@ endf
 " return -- A 15 character log sha for the current HEAD
 " ---------------------------------------------------------------------------
 func! s:get_current_sha(bundle)
-  let cmd = 'cd '.vundle#installer#shellesc(a:bundle.path()).' && git rev-parse HEAD'
-  let cmd = vundle#installer#shellesc_cd(cmd)
+  let cmd = 'cd '.vivid#installer#shellesc(a:bundle.path()).' && git rev-parse HEAD'
+  let cmd = vivid#installer#shellesc_cd(cmd)
   let out = s:system(cmd)[0:15]
   return out
 endf
@@ -388,14 +388,14 @@ func! s:make_sync_command(bang, bundle) abort
       call s:log('>  Plugin ' . a:bundle.name . ' new URI: ' . a:bundle.uri)
       " Directory names match but the origin remotes are not the same
       let cmd_parts = [
-                  \ 'cd '.vundle#installer#shellesc(a:bundle.path()) ,
-                  \ 'git remote set-url origin ' . vundle#installer#shellesc(a:bundle.uri),
+                  \ 'cd '.vivid#installer#shellesc(a:bundle.path()) ,
+                  \ 'git remote set-url origin ' . vivid#installer#shellesc(a:bundle.uri),
                   \ 'git fetch',
                   \ 'git reset --hard origin/HEAD',
                   \ 'git submodule update --init --recursive',
                   \ ]
       let cmd = join(cmd_parts, ' && ')
-      let cmd = vundle#installer#shellesc_cd(cmd)
+      let cmd = vivid#installer#shellesc_cd(cmd)
       let initial_sha = ''
       return [cmd, initial_sha]
     endif
@@ -406,16 +406,16 @@ func! s:make_sync_command(bang, bundle) abort
     endif
 
     let cmd_parts = [
-                \ 'cd '.vundle#installer#shellesc(a:bundle.path()),
+                \ 'cd '.vivid#installer#shellesc(a:bundle.path()),
                 \ 'git pull',
                 \ 'git submodule update --init --recursive',
                 \ ]
     let cmd = join(cmd_parts, ' && ')
-    let cmd = vundle#installer#shellesc_cd(cmd)
+    let cmd = vivid#installer#shellesc_cd(cmd)
 
     let initial_sha = s:get_current_sha(a:bundle)
   else
-    let cmd = 'git clone --recursive '.vundle#installer#shellesc(a:bundle.uri).' '.vundle#installer#shellesc(a:bundle.path())
+    let cmd = 'git clone --recursive '.vivid#installer#shellesc(a:bundle.uri).' '.vivid#installer#shellesc(a:bundle.path())
     let initial_sha = ''
   endif
   return [cmd, initial_sha]
@@ -466,7 +466,7 @@ func! s:sync(bang, bundle) abort
     return 'todate'
   endif
 
-  call add(g:vundle#updated_bundles, [initial_sha, updated_sha, a:bundle])
+  call add(g:vivid#updated_bundles, [initial_sha, updated_sha, a:bundle])
   return 'updated'
 endf
 
@@ -478,7 +478,7 @@ endf
 " cmd    -- the string holding the shell command
 " return -- a string with the relevant characters escaped
 " ---------------------------------------------------------------------------
-func! vundle#installer#shellesc(cmd) abort
+func! vivid#installer#shellesc(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     return '"' . substitute(a:cmd, '"', '\\"', 'g') . '"'
   endif
@@ -492,7 +492,7 @@ endf
 " cmd    -- the command to be fixed (string)
 " return -- the fixed command (string)
 " ---------------------------------------------------------------------------
-func! vundle#installer#shellesc_cd(cmd) abort
+func! vivid#installer#shellesc_cd(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     let cmd = substitute(a:cmd, '^cd ','cd /d ','')  " add /d switch to change drives
     return cmd
@@ -516,7 +516,7 @@ endf
 
 
 " ---------------------------------------------------------------------------
-" Add a log message to Vundle's internal logging variable.
+" Add a log message to Vivid's internal logging variable.
 "
 " str    -- the log message (string)
 " prefix -- optional prefix for multi-line entries (string)
@@ -528,7 +528,7 @@ func! s:log(str, ...) abort
   let lines = split(a:str, '\n', 1)
   let time = strftime(fmt)
   for line in lines
-      call add(g:vundle#log, '['. time .'] '. prefix . line)
+      call add(g:vivid#log, '['. time .'] '. prefix . line)
   endfor
   return a:str
 endf

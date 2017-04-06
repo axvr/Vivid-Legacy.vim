@@ -8,7 +8,7 @@ let b:did_ftplugin = 1
 
 
 " ---------------------------------------------------------------------------
-" Settings for the Vundle update log buffer.
+" Settings for the Vivid update log buffer.
 " ---------------------------------------------------------------------------
 setlocal textwidth=0
 setlocal nowrap
