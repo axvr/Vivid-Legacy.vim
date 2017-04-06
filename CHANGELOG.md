@@ -50,6 +50,7 @@ Leave 3 lines between previous change log item -->
 * New test vimrc file with Vivid auto install
 * New Neovim ``init.vim`` test file
 * Todo list in ``README.md`` and project goals
+* Default downloads to ``https``
 
 ### Changed
 * Forked from Vundle/Vundle.vim

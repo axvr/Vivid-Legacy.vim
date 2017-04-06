@@ -12,12 +12,16 @@ Things to do:
 * [ ] Improve involvement from the community
 * [ ] Speed up and optimise the plugin manager
 * [ ] Fix all of the bugs in Vundle base
+* [ ] Improve Windows support
 * [ ] Add GitLab support
+* [ ] Add update and install progress bar (for YCM especially)
+* [ ] Add support for switching and testing between http:// git:// & https://
 * [ ] Add support for Mercurial repos
 * [ ] Comment all of the code
 * [ ] Improve documentation
 * [ ] Add multi-language support
 * [ ] Disconnect from Vundle upstream
+* [ ] Fix repo deletion bug where credentials are required
 * [ ] Make a Github 'organisation' for contributers to join & get commit access
 * [ ] Replace old README and vim help menu
 * [ ] Improve the test files from Vundle
