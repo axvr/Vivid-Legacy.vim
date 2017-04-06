@@ -2,10 +2,10 @@
 
 Things to do:
 
-* [ ] Restructure repository
+* [x] Restructure repository
 * [ ] Restructure files
-* [ ] Rebrand Vundle fork to Vivid
-* [ ] Rename components
+* [x] Rebrand Vundle fork to Vivid
+* [x] Rename components
 * [ ] Remove redundant code
 * [ ] Add full Neovim support
 * [ ] Replace and modernise Vundle base
