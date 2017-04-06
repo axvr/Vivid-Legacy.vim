@@ -2,7 +2,7 @@
 
 History of all of the changes made to this project
 
-This project is licenced under the [MIT Licence](https://github.com/axvr/Vundle.vim/blob/master/LICENCE).
+This project is licenced under the [MIT Licence](https://github.com/axvr/Vivid.vim/blob/master/LICENCE).
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and it also adheres to [Semantic Versioning](http://semver.org/).
 
@@ -46,9 +46,19 @@ Leave 3 lines between previous change log item -->
 
 ## [0.10.3] - 2017-04-06
 
+### Added
+* New test vimrc file with Vivid auto install
+* New Neovim ``init.vim`` test file
+* Todo list in ``README.md`` and project goals
+
 ### Changed
 * Forked from Vundle/Vundle.vim
 * Restructure of repository and files
+* Redesigned ``CHANGELOG.md``
+* Rebranded most of Vundle to Vivid
+
+### Removed
+* Old ``README_ZH_--.md`` files
 
 
 

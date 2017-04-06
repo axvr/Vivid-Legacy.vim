@@ -1,9 +1,24 @@
+
 set nocompatible
 syntax on
 filetype off
+
 set rtp+=~/.vim/bundle/Vivid.vim/
 call vivid#begin()
-Plugin 'axvr/Vivid.vim'
+
+" Auto Install Vivid
+let vivid_readme=expand('~/.vim/bundle/Vivid.vim/README.md')
+if (!filereadable(vivid_readme))
+  echo "Installing Vivid.vim"
+  "echo ""
+  "silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/axvr/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+  :PluginInstall
+  echo "Vivid.vim was installed"
+endif
+
+Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid
+
 call vivid#end()
 filetype plugin indent on
 

@@ -11,14 +11,17 @@ Things to do:
 * [ ] Replace and modernise Vundle base
 * [ ] Improve involvement from the community
 * [ ] Speed up and optimise the plugin manager
-* [ ] Fix all of the bug in Vundle base
+* [ ] Fix all of the bugs in Vundle base
+* [ ] Add GitLab support
+* [ ] Add support for Mercurial repos
+* [ ] Comment all of the code
 * [ ] Improve documentation
 * [ ] Add multi-language support
 * [ ] Disconnect from Vundle upstream
 * [ ] Make a Github 'organisation' for contributers to join & get commit access
 * [ ] Replace old README and vim help menu
 * [ ] Improve the test files from Vundle
-* [ ] Attempt to use ``https`` before ``http``
+* [x] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
   * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
   * [x] use preview window for search results
@@ -32,6 +35,12 @@ Things to do:
   * [ ] search by description as well
   * [ ] make it rock!
 * [ ] And many more things
+
+---
+
+---
+
+---
 
 ## About
 
