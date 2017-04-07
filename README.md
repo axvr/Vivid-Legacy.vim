@@ -1,6 +1,6 @@
 # Vivid.vim
 
-**Vivid is the next generation of Vundle**
+**Vivid is the Next-Gen Vim Package Manager**
 
 <!-- Badges made using https://shields.io/ -->
 [![Version Badge](https://img.shields.io/badge/Version-v0.10.2-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
@@ -67,7 +67,7 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
     endif
 
     set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
-    call vivid#begin()
+    call vivid#open()
     " Input Plugins Below this Line
 
       Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid (Do not remove)
@@ -81,7 +81,7 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
       "Plugin 'ascenator/L9', {'name': 'newL9'} " Avoid naming confilics
 
     " Input Plugins Above this Line
-    call vivid#end()
+    call vivid#close()
     filetype plugin indent on   " Enable 'filetype' seting
 
     " Continue Vimrc after this line
@@ -118,7 +118,7 @@ See the [``:help vivid``](https://github.com/axvr/Vivid.vim/blob/master/doc/vivi
 See the [changelog]
 
 
-To all of the [Vundle contributors], and the [Vivid contributors]: **Thank you!**
+To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!**
 
 * Vivid was developed and tested with [Vim] 8.0 on Linux
 * Vundle was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
@@ -148,6 +148,7 @@ To all of the [Vundle contributors], and the [Vivid contributors]: **Thank you!*
 * [ ] Allow users to choose to update using latest commit or tag
 * [ ] Comment all of the code
 * [ ] Improve documentation
+* [x] Highlight search term option
 * [ ] Add multi-language support
 * [ ] Disconnect from Vundle upstream
 * [ ] Fix plugin repo deletion bug where credentials are required

@@ -98,25 +98,25 @@ func! vivid#installer#run(func_name, name, ...) abort
 
   redraw
 
-  if 'new' == status
+  if status == 'new'
     echo n.' installed'
-  elseif 'updated' == status
+  elseif status == 'updated'
     echo n.' updated'
-  elseif 'todate' == status
+  elseif status == 'todate'
     echo n.' already installed'
-  elseif 'deleted' == status
+  elseif status == 'deleted'
     echo n.' deleted'
-  elseif 'helptags' == status
+  elseif status == 'helptags'
     echo n.' regenerated'
-  elseif 'pinned' == status
+  elseif status == 'pinned'
     echo n.' pinned'
-  elseif 'error' == status
+  elseif status == 'error'
     echohl Error
     echo 'Error processing '.n
     echohl None
     sleep 1
   else
-    throw 'whoops, unknown status:'.status
+    throw 'ERROR: unknown status:'.status
   endif
 
   let s:last_status = status
@@ -136,7 +136,7 @@ func! s:sign(status)
     return
   endif
 
-  exe ":sign place ".line('.')." line=".line('.')." name=Vu_". a:status ." buffer=" . bufnr("%")
+  exe ":sign place ".line('.')." line=".line('.')." name=Vv_". a:status ." buffer=" . bufnr("%")
 endf
 
 

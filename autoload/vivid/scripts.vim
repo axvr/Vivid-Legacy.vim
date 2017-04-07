@@ -8,17 +8,28 @@
 " ---------------------------------------------------------------------------
 func! vivid#scripts#all(bang, ...)
   let b:match = ''
-  let info = ['"Keymap: i - Install plugin; c - Cleanup; s - Search; R - Reload list']
+  let info = ['"Keymap: i - Install plugin; c - Cleanup; s - Search; R - Reload list; N - Toggle highlight search term']
   let matches = s:load_scripts(a:bang)
   if !empty(a:1)
     let matches = filter(matches, 'v:val =~? "'.escape(a:1,'"').'"')
     let info += ['"Search results for: '.a:1]
     " TODO: highlight matches
+    let g:search_term = a:1
     let b:match = a:1
   endif
   call vivid#scripts#view('search',info, vivid#scripts#bundle_names(reverse(matches)))
   redraw
+  " Highlight search term (temporary)
+  "let _s=@/
+  "if len(a:1) > 0
+    "let @/=''
+    "let @/=a:1
+    "set hls
+    "call feedkeys("n")
+  "endif
   echo len(matches).' plugins found'
+  "let @/=_s
+  "unlet _s
 endf
 
 
@@ -166,7 +177,6 @@ func! vivid#scripts#view(title, headers, results)
   set modifiable
 
   call append(0, a:headers + a:results)
-
   setl buftype=nofile
   setl noswapfile
   set bufhidden=wipe
@@ -217,8 +227,34 @@ func! vivid#scripts#view(title, headers, results)
   nnoremap <buffer> s :PluginSearch
   nnoremap <silent> <buffer> R :call vivid#scripts#reload()<CR>
 
+  nnoremap <silent> <buffer> N :call vivid#scripts#highlight_terms(g:search_term)<CR>
+
   " goto first line after headers
   exec ':'.(len(a:headers) + 1)
+endf
+
+
+" ---------------------------------------------------------------------------
+" Toggle Highlight all search terms
+" ---------------------------------------------------------------------------
+func! vivid#scripts#highlight_terms(term)
+
+  if len(a:term) > 0
+    "let _s=@/
+    let @/=''
+    let @/=a:term
+    "if set hls? == "hlsearch"
+    "  set nohls
+    "elseif set hls? == "nohlsearch"
+    "  set hls
+    "endif
+    set hlsearch!
+    call feedkeys('n')
+    "let @/=_s
+    "unlet _s
+  endif
+  "let @/=''
+
 endf
 
 

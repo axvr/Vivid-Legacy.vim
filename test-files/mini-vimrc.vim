@@ -17,12 +17,12 @@ if (!filereadable(vivid_checkfile))
 endif
 
 set rtp+=~/.vim/bundle/Vivid.vim/
-call vivid#begin()
+call vivid#open()
 " Input Plugins Below this Line
 
 Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid
 
 " Input Plugins Above this Line
-call vivid#end()
+call vivid#close()
 filetype plugin indent on
 

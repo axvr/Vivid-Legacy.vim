@@ -23,7 +23,7 @@ endf
 
 
 " ---------------------------------------------------------------------------
-"  When lazy bundle load is used (begin/end functions), add all configured
+"  When lazy bundle load is used (open/close functions), add all configured
 "  bundles to runtimepath and reorder appropriately.
 " ---------------------------------------------------------------------------
 func! vivid#config#activate_bundles()
