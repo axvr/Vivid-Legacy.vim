@@ -53,12 +53,13 @@ expected on all systems and Vim derivatives, including Neovim and Windows.
   filetype off        " Temporarily disable the 'filetype' setting
 
   " Auto Install Vivid and Plugins
-  let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/check/checkfile.txt')
+  let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
   if (!filereadable(vivid_checkfile))
     echo "Installing Vivid.vim & plugins"
     silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
     :source $MYVIMRC
     :PluginInstall
+    :source $MYVIMRC
     :q
   endif
 
