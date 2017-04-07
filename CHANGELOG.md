@@ -44,7 +44,7 @@ Leave 3 lines between previous change log item -->
 
 ---
 
-## [0.10.3] - 2017-04-06
+## [Unreleased] - 2017-04-06
 
 ### Added
 * New test vimrc file with Vivid auto install
@@ -57,6 +57,8 @@ Leave 3 lines between previous change log item -->
 * Restructure of repository and files
 * Redesigned ``CHANGELOG.md``
 * Rebranded most of Vundle to Vivid
+* Remade ``README.md`` for Vivid
+* Improved auto install
 
 ### Removed
 * Old ``README_ZH_--.md`` files
