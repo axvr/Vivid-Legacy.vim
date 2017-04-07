@@ -2,21 +2,27 @@
 
 **Vivid is the next generation of Vundle**
 
+<!-- Badges made using https://shields.io/ -->
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.2-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
+[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid.vim/blob/master/LICENCE)
+
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
 features of Vundle, to make the most powerful Plugin manager, possible.
 Vivid's main goal is to become fully cross platform, so that it can work as
 expected on all systems and Vim derivatives, including Neovim and Windows.
 
+If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see the [contributing document](https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md).
+
 ## About
 
 [Vivid] allows you to...
 
-* Keep track of and [configure] your plugins right in the ``~/.vimrc``
-* [Install] configured plugins (a.k.a. scripts/bundle)
-* [Update] configured plugins
-* [Search] by name all available [Vim scripts]
-* [Clean] unused plugins up
-* run the above actions in a *single keypress* with [interactive mode]
+* Configure your plugins right in your ``~/.vimrc``
+* Install configured plugins (a.k.a. scripts/bundle)
+* Update configured plugins
+* Search by name all available [Vim scripts]
+* Clean unused plugins up
+* Run the above actions in a *single keypress* with interactive mode
 
 [Vivid] automatically...
 
@@ -27,77 +33,92 @@ expected on all systems and Vim derivatives, including Neovim and Windows.
 
 ## Quick Start
 
-1. Introduction:
+1. Vivid requires that [Git] and Curl are installed on your system
 
-   Installation requires [Git] and triggers [``git clone``] for each configured repository to `~/.vim/bundle/` by default.
-   Curl is required for search.
 
-2. Configure Plugins:
+2. Put this at the top of your ``~/.vimrc`` to use Vivid. Remove plugins you don't need (some of them will not work), they are for illustration purposes. It does not have to be stricly at the top, but if it isn't, then Vim will give errors and will take longer to open.
 
-  Put this at the top of your ``~/.vimrc`` to use Vivid. Remove plugins you don't need (some of them will not work), they are for illustration purposes. It does not have to be stricly at the top, but if it isn't Vim will give errors and will take longer to open.
+    ```vim
+    " Example Vim Config File (~/.vimrc)
+    " ==================================
 
-  ```vim
-  " Example Vim Config File (~/.vimrc)
-  " ==================================
+    " Brief help
+    " ----------
+    " :PluginList       - Lists all configured plugins
+    " :PluginUpdate     - Update all plugins to latest versions
+    " :PluginInstall    - Installs plugins; append `!` to update or just :PluginUpdate
+    " :PluginSearch foo - Searches for foo; append `!` to refresh local cache
+    " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
+    " :help vivid       - View documentation from within Vim
 
-  " Brief help
-  " ----------
-  " :PluginList       - Lists all configured plugins
-  " :PluginInstall    - Installs plugins; append `!` to update or just :PluginUpdate
-  " :PluginSearch foo - Searches for foo; append `!` to refresh local cache
-  " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
-  " :help vivid       - View documentation from within Vim
+    set nocompatible    " Remove Vi backwards compatibility
+    syntax on           " Enable syntax highlighting
+    filetype off        " Temporarily disable the 'filetype' setting
 
-  set nocompatible    " Remove Vi backwards compatibility
-  syntax on           " Enable syntax highlighting
-  filetype off        " Temporarily disable the 'filetype' setting
+    " Auto Install Vivid and Plugins
+    let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
+    if (!filereadable(vivid_checkfile))
+      echo "Installing Vivid.vim & plugins"
+      silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
+      :source $MYVIMRC
+      :PluginInstall
+      :source $MYVIMRC
+      :q
+    endif
 
-  " Auto Install Vivid and Plugins
-  let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
-  if (!filereadable(vivid_checkfile))
-    echo "Installing Vivid.vim & plugins"
-    silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
-    :source $MYVIMRC
-    :PluginInstall
-    :source $MYVIMRC
-    :q
-  endif
+    set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
+    call vivid#begin()
+    " Input Plugins Below this Line
 
-  set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
-  call vivid#begin()
-  " Input Plugins Below this Line
+      Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid (Do not remove)
 
-    Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid (Do not remove)
+      " The following are examples of different formats supported.
+      "Plugin 'tpope/vim-fugitive' " Plugin from GitHub
+      "Plugin 'L9' " Plugin from http://vim-scripts.org/vim/scripts.html
+      "Plugin 'git://git.wincent.com/command-t.git' " Git plugin not on GitHub
+      "Plugin 'file:///home/user/path/to/plugin' Local git plugins
+      "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} " Plugin is in a GitHub subdirectory
+      "Plugin 'ascenator/L9', {'name': 'newL9'} " Avoid naming confilics
 
-    " The following are examples of different formats supported.
-    Plugin 'tpope/vim-fugitive' " Plugin from GitHub
-    Plugin 'L9' " Plugin from http://vim-scripts.org/vim/scripts.html
-    Plugin 'git://git.wincent.com/command-t.git' " Git plugin not on GitHub
-    Plugin 'file:///home/user/path/to/plugin' Local git plugins
-    Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} " Plugin is in a GitHub subdirectory
-    Plugin 'ascenator/L9', {'name': 'newL9'} " Avoid naming confilics
+    " Input Plugins Above this Line
+    call vivid#end()
+    filetype plugin indent on   " Enable 'filetype' seting
 
-  " Input Plugins Above this Line
-  call vivid#end()
-  filetype plugin indent on   " Enable 'filetype' seting
+    " Continue Vimrc after this line
+    ```
 
-  " Continue Vimrc after this line
-  ```
+    This VimL will install all plugins already in the ``~/.vimrc`` file automatically,
+    when Vim is opened on a system which does not have Vivid.vim installed. This makes your
+    ``~/.vimrc`` file more portable , for use on other systems.
 
-  NOTE: For those using the fish shell: add ``set shell=/bin/bash`` to the top of your ``~/.vimrc``
+    NOTE: To install plugins added after Vivid.vim is installed, see section 3:
+    Install Plugins. Seen below.
+
+    Shell Notes (If you don't know what this means, ignore this):
+
+    * Bash works out of the box.
+    * Zsh should work perfectly fine with Vivid.vim out of the box.
+    * For those using the fish shell: add ``set shell=/bin/bash`` to the top of your ``~/.vimrc``.
+
 
 3. Install Plugins:
 
-   Launch ``vim`` and run ``:PluginInstall``
+    Launch ``vim`` and run ``:PluginInstall``
 
-   To install from command line: ``vim +PluginInstall +qall``
+    To install from command line: ``vim +PluginInstall +qall``
+
+
+4. Update Plugins:
+
+    Launch ``vim`` and run ``:PluginUpdate``
 
 
 See the [``:help vivid``](https://github.com/axvr/Vivid.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
 
 See the [changelog]
 
-*Thank you!*
+
+To all of the [Vundle contributors], and the [Vivid contributors]: **Thank you!**
 
 * Vivid was developed and tested with [Vim] 8.0 on Linux
 * Vundle was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
@@ -159,12 +180,11 @@ See the [changelog]
 [Vim scripts]:http://vim-scripts.org/vim/scripts.html
 [help tags]:http://vimdoc.sourceforge.net/htmldoc/helphelp.html#:helptags
 [runtime path]:http://vimdoc.sourceforge.net/htmldoc/options.html#%27runtimepath%27
+[Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
+[Vivid contributors]:https://github.com/axvr/Vivid.vim/graphs/contributors
 
 <!--
-
-Old Vundle Vimrc Example:
-
-
+  Old Vundle Vimrc Example:
    ```vim
    set nocompatible              " be iMproved, required
    filetype off                  " required
@@ -212,14 +232,14 @@ Old Vundle Vimrc Example:
    ```
 
 
-[Windows setup]:https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
-[FAQ]:https://github.com/VundleVim/Vundle.vim/wiki
-[Tips]:https://github.com/VundleVim/Vundle.vim/wiki/Tips-and-Tricks
-[configure]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L126-L233
-[install]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L234-L254
-[update]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
-[search]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L266-L295
-[clean]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L303-L318
-[interactive mode]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L319-L360
-[interface change]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L372-L396
+  [Windows setup]:https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
+  [FAQ]:https://github.com/VundleVim/Vundle.vim/wiki
+  [Tips]:https://github.com/VundleVim/Vundle.vim/wiki/Tips-and-Tricks
+  [configure]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L126-L233
+  [install]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L234-L254
+  [update]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
+  [search]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L266-L295
+  [clean]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L303-L318
+  [interactive mode]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L319-L360
+  [interface change]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L372-L396
 -->
