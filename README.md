@@ -11,7 +11,7 @@ features of Vundle, to make the most powerful Plugin manager, possible.
 Vivid's main goal is to become fully cross platform, so that it can work as
 expected on all systems and Vim derivatives, including Neovim and Windows.
 
-If you find any bugs or errors, please feel free to submit an issue as i cannot test ALIS on every possible system for problems. I would in the future like to add multi-language support to ALIS, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to ALIS see the [contributing document](https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md).
+If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document](https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md).
 
 ## About
 
