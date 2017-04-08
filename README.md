@@ -29,7 +29,7 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 * manages the [runtime path] of your installed scripts
 * regenerates [help tags] after installing and updating
 
-![Vundle-installer](http://i.imgur.com/Rueh7Cc.png)
+![Vivid Update Screen](screenshots/vivid-shot-01.png)
 
 ## Quick Start
 
