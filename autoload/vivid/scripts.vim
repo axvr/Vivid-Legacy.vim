@@ -187,9 +187,9 @@ function! vivid#scripts#view(title, headers, results)
 
   setl ft=vivid
   setl syntax=vim
-  syn keyword vimCommand Plugin
-  syn keyword vimCommand Bundle
-  syn keyword vimCommand Helptags
+  syntax keyword vimCommand Plugin
+  syntax keyword vimCommand Bundle
+  syntax keyword vimCommand Helptags
 
   command!  -buffer -bang -nargs=1 DeletePlugin
     \ call vivid#installer#run('vivid#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
