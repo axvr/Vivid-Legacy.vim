@@ -8,26 +8,27 @@
 
 
 " Plugin Commands
-com! -nargs=+  -bar   Plugin
+command! -nargs=+  -bar   Plugin
 \ call vivid#config#bundle(<args>)
 
-com! -nargs=* -bang -complete=custom,vivid#scripts#complete PluginInstall
+command! -nargs=* -bang -complete=custom,vivid#scripts#complete PluginInstall
 \ call vivid#installer#new('!' == '<bang>', <f-args>)
 
-com! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
+" Maybe remove Search functionality from Vivid
+command! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
 \ call vivid#scripts#all('!' == '<bang>', <q-args>)
 
-com! -nargs=0 -bang PluginList
+command! -nargs=0 -bang PluginList
 \ call vivid#installer#list('!' == '<bang>')
 
-com! -nargs=? -bang   PluginClean
+command! -nargs=? -bang   PluginClean
 \ call vivid#installer#clean('!' == '<bang>')
 
-com! -nargs=0         PluginDocs
+command! -nargs=0         PluginDocs
 \ call vivid#installer#helptags(g:vivid#bundles)
 
 " Aliases
-com! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
+command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
 
 " These will be removed and replaced, they are currently here for reference
 " purposes.
@@ -61,19 +62,19 @@ endif
 
 " Alternative to vivid#rc, offers speed up by modifying rtp (RunTimePath) only when end()
 " called later.
-func! vivid#open(...) abort
+function! vivid#open(...) abort
   let g:vivid#lazy_load = 1
   if a:0 > 0
     let g:vivid#bundle_dir = expand(a:1, 1)
   endif
   call vivid#config#init()
-endf
+endfunction
 
 " Finishes putting plugins on the rtp.
-func! vivid#close(...) abort
+function! vivid#close(...) abort
   unlet g:vivid#lazy_load
   call vivid#config#activate_bundles()
-endf
+endfunction
 
 " Initialize some global variables used by Vivid.
 let vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
@@ -81,4 +82,3 @@ let vivid#bundles = []
 let vivid#lazy_load = 0
 let vivid#log = []
 let vivid#updated_bundles = []
-

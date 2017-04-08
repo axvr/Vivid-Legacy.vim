@@ -6,7 +6,7 @@
 " bang -- if 1 refresh the script name cache, if 0 don't
 " ...  -- a plugin name to search for
 " ---------------------------------------------------------------------------
-func! vivid#scripts#all(bang, ...)
+function! vivid#scripts#all(bang, ...)
   let b:match = ''
   let info = ['"Keymap: i - Install plugin; c - Cleanup; s - Search; R - Reload list; N - Toggle highlight search term']
   let matches = s:load_scripts(a:bang)
@@ -30,16 +30,16 @@ func! vivid#scripts#all(bang, ...)
   echo len(matches).' plugins found'
   "let @/=_s
   "unlet _s
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " Repeat the search for bundles.
 " ---------------------------------------------------------------------------
-func! vivid#scripts#reload() abort
-  silent exec ':PluginSearch! '.(exists('b:match') ? b:match : '')
+function! vivid#scripts#reload() abort
+  silent execute ':PluginSearch! '.(exists('b:match') ? b:match : '')
   redraw
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ endf
 "            candidates, or all installed plugin names when running an 'Update
 "            variant'. see also :h command-completion-custom
 " ---------------------------------------------------------------------------
-func! vivid#scripts#complete(a,c,d)
+function! vivid#scripts#complete(a,c,d)
   if match(a:c, '\v^%(Plugin|Vivid)%(Install!|Update)') == 0
     " Only installed plugins if updating
     return join(map(copy(g:vivid#bundles), 'v:val.name'), "\n")
@@ -58,13 +58,13 @@ func! vivid#scripts#complete(a,c,d)
     " Or all known plugins otherwise
     return join(s:load_scripts(0),"\n")
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " View the logfile after an update or installation.
 " ---------------------------------------------------------------------------
-func! s:view_log()
+function! s:view_log()
   if !exists('s:log_file')
     let s:log_file = tempname()
   endif
@@ -80,14 +80,14 @@ func! s:view_log()
   setl ro noma
 
   wincmd P | wincmd H
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " Parse the output from git log after an update to create a change log for the
 " user.
 " ---------------------------------------------------------------------------
-func! s:create_changelog() abort
+function! s:create_changelog() abort
   let changelog = ['Updated Plugins:']
   for bundle_data in g:vivid#updated_bundles
     let initial_sha = bundle_data[0]
@@ -115,13 +115,13 @@ func! s:create_changelog() abort
     endfor
   endfor
   return changelog
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " View the change log after an update or installation.
 " ---------------------------------------------------------------------------
-func! s:view_changelog()
+function! s:view_changelog()
   if !exists('s:changelog_file')
     let s:changelog_file = tempname()
   endif
@@ -138,7 +138,7 @@ func! s:view_changelog()
   setfiletype vividlog
 
   wincmd P | wincmd H
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -147,9 +147,9 @@ endf
 " names  -- a list of names (strings) of plugins
 " return -- a list of 'Plugin ...' lines suitable to be written to a buffer
 " ---------------------------------------------------------------------------
-func! vivid#scripts#bundle_names(names)
+function! vivid#scripts#bundle_names(names)
   return map(copy(a:names), ' printf("Plugin ' ."'%s'".'", v:val) ')
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -161,12 +161,12 @@ endf
 " results -- the main information to be displayed in the buffer (list of
 "            strings)
 " ---------------------------------------------------------------------------
-func! vivid#scripts#view(title, headers, results)
+function! vivid#scripts#view(title, headers, results)
   if exists('s:view') && bufloaded(s:view)
-    exec s:view.'bd!'
+    execute s:view.'bd!'
   endif
 
-  exec 'silent pedit [Vivid] '.a:title
+  execute 'silent pedit [Vivid] '.a:title
 
   wincmd P | wincmd H
 
@@ -208,13 +208,13 @@ func! vivid#scripts#view(title, headers, results)
   com! -buffer -nargs=0 VividChangelog call s:view_changelog()
 
   nnoremap <silent> <buffer> q :silent bd!<CR>
-  nnoremap <silent> <buffer> D :exec 'Delete'.getline('.')<CR>
+  nnoremap <silent> <buffer> D :execute 'Delete'.getline('.')<CR>
 
-  nnoremap <silent> <buffer> add  :exec 'Install'.getline('.')<CR>
-  nnoremap <silent> <buffer> add! :exec 'Install'.substitute(getline('.'), '^Plugin ', 'Plugin! ', '')<CR>
+  nnoremap <silent> <buffer> add  :execute 'Install'.getline('.')<CR>
+  nnoremap <silent> <buffer> add! :execute 'Install'.substitute(getline('.'), '^Plugin ', 'Plugin! ', '')<CR>
 
-  nnoremap <silent> <buffer> i :exec 'InstallAndRequire'.getline('.')<CR>
-  nnoremap <silent> <buffer> I :exec 'InstallAndRequire'.substitute(getline('.'), '^Plugin ', 'Plugin! ', '')<CR>
+  nnoremap <silent> <buffer> i :execute 'InstallAndRequire'.getline('.')<CR>
+  nnoremap <silent> <buffer> I :execute 'InstallAndRequire'.substitute(getline('.'), '^Plugin ', 'Plugin! ', '')<CR>
 
   nnoremap <silent> <buffer> l :VividLog<CR>
   nnoremap <silent> <buffer> u :VividChangelog<CR>
@@ -230,14 +230,14 @@ func! vivid#scripts#view(title, headers, results)
   nnoremap <silent> <buffer> N :call vivid#scripts#highlight_terms(g:search_term)<CR>
 
   " goto first line after headers
-  exec ':'.(len(a:headers) + 1)
-endf
+  execute ':'.(len(a:headers) + 1)
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " Toggle Highlight all search terms
 " ---------------------------------------------------------------------------
-func! vivid#scripts#highlight_terms(term)
+function! vivid#scripts#highlight_terms(term)
 
   if len(a:term) > 0
     "let _s=@/
@@ -255,7 +255,7 @@ func! vivid#scripts#highlight_terms(term)
   endif
   "let @/=''
 
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -264,7 +264,7 @@ endf
 " to     -- the filename (string) to save the database to
 " return -- 0 on success, 1 if an error occurred
 " ---------------------------------------------------------------------------
-func! s:fetch_scripts(to)
+function! s:fetch_scripts(to)
   let scripts_dir = fnamemodify(expand(a:to, 1), ":h")
   if !isdirectory(scripts_dir)
     call mkdir(scripts_dir, "p")
@@ -292,7 +292,7 @@ func! s:fetch_scripts(to)
     return v:shell_error
   endif
   return 0
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -303,7 +303,7 @@ endf
 " return -- a list of strings, these are the names (valid bundle
 "           specifications) of all plugins from vim-scripts.org
 " ---------------------------------------------------------------------------
-func! s:load_scripts(bang)
+function! s:load_scripts(bang)
   let f = expand(g:vivid#bundle_dir.'/.vivid/script-names.vim-scripts.org.json', 1)
   if a:bang || !filereadable(f)
     if 0 != s:fetch_scripts(f)
@@ -311,6 +311,6 @@ func! s:load_scripts(bang)
     end
   endif
   return eval(readfile(f, 'b')[0])
-endf
+endfunction
 
 " vim: set expandtab sts=2 ts=2 sw=2 tw=78 norl:

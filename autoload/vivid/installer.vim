@@ -6,7 +6,7 @@
 " bang   -- 1 or 0
 " ...    -- any number of bundle specifications (separate arguments)
 " ---------------------------------------------------------------------------
-func! vivid#installer#new(bang, ...) abort
+function! vivid#installer#new(bang, ...) abort
   " No specific plugins are specified. Operate on all plugins.
   if a:0 == 0
     let bundles = g:vivid#bundles
@@ -33,7 +33,7 @@ func! vivid#installer#new(bang, ...) abort
   call s:process(a:bang, (a:bang ? 'add!' : 'add'))
 
   call vivid#config#require(bundles)
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -43,7 +43,7 @@ endf
 " bang   -- not used (FIXME)
 " cmd    -- the (normal mode) command to execute for every line as a string
 " ---------------------------------------------------------------------------
-func! s:process(bang, cmd)
+function! s:process(bang, cmd)
   let msg = ''
 
   redraw
@@ -54,7 +54,7 @@ func! s:process(bang, cmd)
   for line in lines
     redraw
 
-    exec ':norm '.a:cmd
+    execute ':norm '.a:cmd
 
     if 'error' == s:last_status
       let msg = 'With errors; press l to view log'
@@ -65,14 +65,14 @@ func! s:process(bang, cmd)
     endif
 
     " goto next one
-    exec ':+1'
+    execute ':+1'
 
     setl nomodified
   endfor
 
   redraw
   echo 'Done! '.msg
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -84,7 +84,7 @@ endf
 "              optional argument will be used)
 " return    -- the status returned by the call to func_name
 " ---------------------------------------------------------------------------
-func! vivid#installer#run(func_name, name, ...) abort
+function! vivid#installer#run(func_name, name, ...) abort
   let n = a:name
 
   echo 'Processing '.n
@@ -122,7 +122,7 @@ func! vivid#installer#run(func_name, name, ...) abort
   let s:last_status = status
 
   return status
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -131,13 +131,13 @@ endf
 "
 " status -- string describing the status
 " ---------------------------------------------------------------------------
-func! s:sign(status)
+function! s:sign(status)
   if (!has('signs'))
     return
   endif
 
   exe ":sign place ".line('.')." line=".line('.')." name=Vv_". a:status ." buffer=" . bufnr("%")
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -147,13 +147,13 @@ endf
 " name   -- the name of a bundle (string)
 " return -- the return value from vivid#installer#install()
 " ---------------------------------------------------------------------------
-func! vivid#installer#install_and_require(bang, name) abort
+function! vivid#installer#install_and_require(bang, name) abort
   let result = vivid#installer#install(a:bang, a:name)
   let b = vivid#config#bundle(a:name, {})
   call vivid#installer#helptags([b])
   call vivid#config#require([b])
   return result
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -163,7 +163,7 @@ endf
 " name   -- the name of a bundle (string)
 " return -- the return value from s:sync()
 " ---------------------------------------------------------------------------
-func! vivid#installer#install(bang, name) abort
+function! vivid#installer#install(bang, name) abort
   if !isdirectory(g:vivid#bundle_dir) | call mkdir(g:vivid#bundle_dir, 'p') | endif
 
   let n = substitute(a:name,"['".'"]\+','','g')
@@ -176,7 +176,7 @@ func! vivid#installer#install(bang, name) abort
   endif
 
   return s:sync(a:bang, b)
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -184,13 +184,13 @@ endf
 "
 " return -- 'error' if an error occurred, else return 'helptags'
 " ---------------------------------------------------------------------------
-func! vivid#installer#docs() abort
+function! vivid#installer#docs() abort
   let error_count = vivid#installer#helptags(g:vivid#bundles)
   if error_count > 0
       return 'error'
   endif
   return 'helptags'
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -200,7 +200,7 @@ endf
 "            called.
 " return  -- the number of directories where :helptags failed
 " ---------------------------------------------------------------------------
-func! vivid#installer#helptags(bundles) abort
+function! vivid#installer#helptags(bundles) abort
   let bundle_dirs = map(copy(a:bundles),'v:val.rtpath')
   let help_dirs = filter(bundle_dirs, 's:has_doc(v:val)')
 
@@ -213,7 +213,7 @@ func! vivid#installer#helptags(bundles) abort
   call s:log('Helptags: '.len(help_dirs).' plugins processed')
 
   return len(errors)
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -222,12 +222,12 @@ endf
 "
 " bang   -- not used
 " ---------------------------------------------------------------------------
-func! vivid#installer#list(bang) abort
+function! vivid#installer#list(bang) abort
   let bundles = vivid#scripts#bundle_names(map(copy(g:vivid#bundles), 'v:val.name_spec'))
   call vivid#scripts#view('list', ['" My Plugins'], bundles)
   redraw
   echo len(g:vivid#bundles).' plugins configured'
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -237,7 +237,7 @@ endf
 " bang   -- 0 if the user should be asked to confirm every deletion, 1 if they
 "           should be removed unconditionally
 " ---------------------------------------------------------------------------
-func! vivid#installer#clean(bang) abort
+function! vivid#installer#clean(bang) abort
   let bundle_dirs = map(copy(g:vivid#bundles), 'v:val.path()')
   let all_dirs = (v:version > 702 || (v:version == 702 && has("patch51")))
   \   ? split(globpath(g:vivid#bundle_dir, '*', 1), "\n")
@@ -265,7 +265,7 @@ func! vivid#installer#clean(bang) abort
       call s:process(a:bang, 'D')
     endif
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -276,7 +276,7 @@ endf
 " return   -- 'error' if an error occurred, 'deleted' if the plugin folder was
 "             successfully deleted
 " ---------------------------------------------------------------------------
-func! vivid#installer#delete(bang, dir_name) abort
+function! vivid#installer#delete(bang, dir_name) abort
 
   let cmd = ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh'))) ?
   \           'rmdir /S /Q' :
@@ -297,7 +297,7 @@ func! vivid#installer#delete(bang, dir_name) abort
   else
     return 'deleted'
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -306,13 +306,13 @@ endf
 " rtp    -- a path (string) where the plugin is installed
 " return -- 1 if some documentation was found, 0 otherwise
 " ---------------------------------------------------------------------------
-func! s:has_doc(rtp) abort
+function! s:has_doc(rtp) abort
   return isdirectory(a:rtp.'/doc')
   \   && (!filereadable(a:rtp.'/doc/tags') || filewritable(a:rtp.'/doc/tags'))
   \   && (v:version > 702 || (v:version == 702 && has("patch51")))
   \     ? !(empty(glob(a:rtp.'/doc/*.txt', 1)) && empty(glob(a:rtp.'/doc/*.??x', 1)))
   \     : !(empty(glob(a:rtp.'/doc/*.txt')) && empty(glob(a:rtp.'/doc/*.??x')))
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -321,7 +321,7 @@ endf
 " rtp    -- the path to the plugin's root directory (string)
 " return -- 1 if :helptags succeeded, 0 otherwise
 " ---------------------------------------------------------------------------
-func! s:helptags(rtp) abort
+function! s:helptags(rtp) abort
   " it is important to keep trailing slash here
   let doc_path = resolve(a:rtp . '/doc/')
   call s:log(':helptags '.doc_path)
@@ -332,7 +332,7 @@ func! s:helptags(rtp) abort
     return 0
   endtry
   return 1
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -342,12 +342,12 @@ endf
 " bundle -- a bundle object to check the repository for
 " return -- the URL for the origin remote (string)
 " ---------------------------------------------------------------------------
-func! s:get_current_origin_url(bundle) abort
+function! s:get_current_origin_url(bundle) abort
   let cmd = 'cd '.vivid#installer#shellesc(a:bundle.path()).' && git config --get remote.origin.url'
   let cmd = vivid#installer#shellesc_cd(cmd)
   let out = s:strip(s:system(cmd))
   return out
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -356,12 +356,12 @@ endf
 " bundle -- a bundle object
 " return -- A 15 character log sha for the current HEAD
 " ---------------------------------------------------------------------------
-func! s:get_current_sha(bundle)
+function! s:get_current_sha(bundle)
   let cmd = 'cd '.vivid#installer#shellesc(a:bundle.path()).' && git rev-parse HEAD'
   let cmd = vivid#installer#shellesc_cd(cmd)
   let out = s:system(cmd)[0:15]
   return out
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -377,7 +377,7 @@ endf
 " return -- A list containing the command to run and the sha for the current
 "           HEAD
 " ---------------------------------------------------------------------------
-func! s:make_sync_command(bang, bundle) abort
+function! s:make_sync_command(bang, bundle) abort
   let git_dir = expand(a:bundle.path().'/.git/', 1)
   if isdirectory(git_dir) || filereadable(expand(a:bundle.path().'/.git', 1))
 
@@ -419,7 +419,7 @@ func! s:make_sync_command(bang, bundle) abort
     let initial_sha = ''
   endif
   return [cmd, initial_sha]
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -435,7 +435,7 @@ endf
 "            - error   : An error occurred in the shell command
 "            - pinned  : The bundle is marked as pinned
 " ---------------------------------------------------------------------------
-func! s:sync(bang, bundle) abort
+function! s:sync(bang, bundle) abort
   " Do not sync if this bundle is pinned
   if a:bundle.is_pinned()
     return 'pinned'
@@ -468,7 +468,7 @@ func! s:sync(bang, bundle) abort
 
   call add(g:vivid#updated_bundles, [initial_sha, updated_sha, a:bundle])
   return 'updated'
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -478,12 +478,12 @@ endf
 " cmd    -- the string holding the shell command
 " return -- a string with the relevant characters escaped
 " ---------------------------------------------------------------------------
-func! vivid#installer#shellesc(cmd) abort
+function! vivid#installer#shellesc(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     return '"' . substitute(a:cmd, '"', '\\"', 'g') . '"'
   endif
   return shellescape(a:cmd)
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -492,14 +492,14 @@ endf
 " cmd    -- the command to be fixed (string)
 " return -- the fixed command (string)
 " ---------------------------------------------------------------------------
-func! vivid#installer#shellesc_cd(cmd) abort
+function! vivid#installer#shellesc_cd(cmd) abort
   if ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh')))
     let cmd = substitute(a:cmd, '^cd ','cd /d ','')  " add /d switch to change drives
     return cmd
   else
     return a:cmd
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -510,9 +510,9 @@ endf
 " cmd    -- the command passed to system() (string)
 " return -- the return value from system()
 " ---------------------------------------------------------------------------
-func! s:system(cmd) abort
+function! s:system(cmd) abort
   return system(a:cmd)
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -522,7 +522,7 @@ endf
 " prefix -- optional prefix for multi-line entries (string)
 " return -- a:str
 " ---------------------------------------------------------------------------
-func! s:log(str, ...) abort
+function! s:log(str, ...) abort
   let prefix = a:0 > 0 ? a:1 : ''
   let fmt = '%Y-%m-%d %H:%M:%S'
   let lines = split(a:str, '\n', 1)
@@ -534,7 +534,7 @@ func! s:log(str, ...) abort
     call add(g:vivid#log, entry)
   endfor
   return a:str
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -543,8 +543,8 @@ endf
 " str    -- The string to rid of trailing and leading spaces
 " return -- A string stripped of side spaces
 " ---------------------------------------------------------------------------
-func! s:strip(str)
+function! s:strip(str)
   return substitute(a:str, '\%^\_s*\(.\{-}\)\_s*\%$', '\1', '')
-endf
+endfunction
 
 " vim: set expandtab sts=2 ts=2 sw=2 tw=78 norl:

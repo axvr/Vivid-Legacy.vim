@@ -5,7 +5,7 @@
 " ...    -- a dictionary of options for the plugin
 " return -- the return value from vivid#config#init_bundle()
 " ---------------------------------------------------------------------------
-func! vivid#config#bundle(arg, ...)
+function! vivid#config#bundle(arg, ...)
   let bundle = vivid#config#init_bundle(a:arg, a:000)
   if !s:check_bundle_name(bundle)
     return
@@ -19,17 +19,17 @@ func! vivid#config#bundle(arg, ...)
     call s:rtp_add_defaults()
   endif
   return bundle
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 "  When lazy bundle load is used (open/close functions), add all configured
 "  bundles to runtimepath and reorder appropriately.
 " ---------------------------------------------------------------------------
-func! vivid#config#activate_bundles()
+function! vivid#config#activate_bundles()
   call s:rtp_add_a()
   call s:rtp_add_defaults()
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -39,12 +39,12 @@ endf
 " directories from a previous call. In theory, this should only be called
 " once.
 " ---------------------------------------------------------------------------
-func! vivid#config#init()
+function! vivid#config#init()
   if !exists('g:vivid#bundles') | let g:vivid#bundles = [] | endif
   call s:rtp_rm_a()
   let g:vivid#bundles = []
   let s:bundle_names = {}
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -52,17 +52,17 @@ endf
 "
 " bundles -- a list of bundle objects
 " ---------------------------------------------------------------------------
-func! vivid#config#require(bundles) abort
+function! vivid#config#require(bundles) abort
   for b in a:bundles
     call s:rtp_add(b.rtpath)
     call s:rtp_add(g:vivid#bundle_dir)
     " TODO: it has to be relative rtpath, not bundle.name
-    exec 'runtime! '.b.name.'/plugin/*.vim'
-    exec 'runtime! '.b.name.'/after/*.vim'
+    execute 'runtime! '.b.name.'/plugin/*.vim'
+    execute 'runtime! '.b.name.'/after/*.vim'
     call s:rtp_rm(g:vivid#bundle_dir)
   endfor
   call s:rtp_add_defaults()
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ endf
 " opts   -- the options dictionary from then bundle definition
 " return -- an initialized bundle object
 " ---------------------------------------------------------------------------
-func! vivid#config#init_bundle(name, opts)
+function! vivid#config#init_bundle(name, opts)
   if a:name != substitute(a:name, '^\s*\(.\{-}\)\s*$', '\1', '')
     echo "Spurious leading and/or trailing whitespace found in plugin spec '" . a:name . "'"
   endif
@@ -80,7 +80,7 @@ func! vivid#config#init_bundle(name, opts)
   let b = extend(opts, copy(s:bundle))
   let b.rtpath = s:rtpath(opts)
   return b
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -103,7 +103,7 @@ funct! s:check_bundle_name(bundle)
   endif
   let s:bundle_names[a:bundle.name] = a:bundle.name_spec
   return 1
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -114,7 +114,7 @@ endf
 " return -- a dictionary with the user supplied options for the bundle, this
 "           will be merged with a s:bundle object into one dictionary.
 " ---------------------------------------------------------------------------
-func! s:parse_options(opts)
+function! s:parse_options(opts)
   " TODO: improve this
   if len(a:opts) != 1 | return {} | endif
 
@@ -123,7 +123,7 @@ func! s:parse_options(opts)
   else
     return {'rev': a:opts[0]}
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -135,7 +135,7 @@ endf
 "           'uri') for cloning the plugin  and the original argument (key
 "           'name_spec')
 " ---------------------------------------------------------------------------
-func! s:parse_name(arg)
+function! s:parse_name(arg)
   let arg = a:arg
   let git_proto = exists('g:vivid_default_git_proto') ? g:vivid_default_git_proto : 'https'
 
@@ -156,7 +156,7 @@ func! s:parse_name(arg)
     let uri  = git_proto.'://github.com/vim-scripts/'.name.'.git'
   endif
   return {'name': name, 'uri': uri, 'name_spec': arg }
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -164,7 +164,7 @@ endf
 "  directories that were in the default runtimepath appear first in the list
 "  (with their 'after' directories last).
 " ---------------------------------------------------------------------------
-func! s:rtp_add_defaults()
+function! s:rtp_add_defaults()
   let current = &rtp
   set rtp&vim
   let default = &rtp
@@ -172,36 +172,36 @@ func! s:rtp_add_defaults()
   let default_rtp_items = split(default, ',')
   if !empty(default_rtp_items)
     let first_item = fnameescape(default_rtp_items[0])
-    exec 'set rtp-=' . first_item
-    exec 'set rtp^=' . first_item
+    execute 'set rtp-=' . first_item
+    execute 'set rtp^=' . first_item
   endif
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " Remove all paths for the plugins which are managed by Vivid from the
 " runtimepath.
 " ---------------------------------------------------------------------------
-func! s:rtp_rm_a()
+function! s:rtp_rm_a()
   let paths = map(copy(g:vivid#bundles), 'v:val.rtpath')
   let prepends = join(paths, ',')
   let appends = join(paths, '/after,').'/after'
-  exec 'set rtp-='.fnameescape(prepends)
-  exec 'set rtp-='.fnameescape(appends)
-endf
+  execute 'set rtp-='.fnameescape(prepends)
+  execute 'set rtp-='.fnameescape(appends)
+endfunction
 
 
 " ---------------------------------------------------------------------------
 " Add all paths for the plugins which are managed by Vivid to the
 " runtimepath.
 " ---------------------------------------------------------------------------
-func! s:rtp_add_a()
+function! s:rtp_add_a()
   let paths = map(copy(g:vivid#bundles), 'v:val.rtpath')
   let prepends = join(paths, ',')
   let appends = join(paths, '/after,').'/after'
-  exec 'set rtp^='.fnameescape(prepends)
-  exec 'set rtp+='.fnameescape(appends)
-endf
+  execute 'set rtp^='.fnameescape(prepends)
+  execute 'set rtp+='.fnameescape(appends)
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -210,10 +210,10 @@ endf
 " dir    -- the directory name to be removed as a string.  The corresponding
 "           'after' directory will also be removed.
 " ---------------------------------------------------------------------------
-func! s:rtp_rm(dir) abort
-  exec 'set rtp-='.fnameescape(expand(a:dir, 1))
-  exec 'set rtp-='.fnameescape(expand(a:dir.'/after', 1))
-endf
+function! s:rtp_rm(dir) abort
+  execute 'set rtp-='.fnameescape(expand(a:dir, 1))
+  execute 'set rtp-='.fnameescape(expand(a:dir.'/after', 1))
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -222,10 +222,10 @@ endf
 " dir    -- the directory name to be added as a string.  The corresponding
 "           'after' directory will also be added.
 " ---------------------------------------------------------------------------
-func! s:rtp_add(dir) abort
-  exec 'set rtp^='.fnameescape(expand(a:dir, 1))
-  exec 'set rtp+='.fnameescape(expand(a:dir.'/after', 1))
-endf
+function! s:rtp_add(dir) abort
+  execute 'set rtp^='.fnameescape(expand(a:dir, 1))
+  execute 'set rtp+='.fnameescape(expand(a:dir.'/after', 1))
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -234,9 +234,9 @@ endf
 " path   -- the path to expand as a string
 " return -- the expanded and simplified path
 " ---------------------------------------------------------------------------
-func! s:expand_path(path) abort
+function! s:expand_path(path) abort
   return simplify(expand(a:path, 1))
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -247,9 +247,9 @@ endf
 " opts   -- a bundle dict
 " return -- expanded path to the corresponding plugin directory
 " ---------------------------------------------------------------------------
-func! s:rtpath(opts)
+function! s:rtpath(opts)
   return has_key(a:opts, 'rtp') ? s:expand_path(a:opts.path().'/'.a:opts.rtp) : a:opts.path()
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -264,9 +264,9 @@ let s:bundle = {}
 "
 " return -- the target location to clone this bundle to
 " ---------------------------------------------------------------------------
-func! s:bundle.path()
+function! s:bundle.path()
   return s:expand_path(g:vivid#bundle_dir.'/') . self.name
-endf
+endfunction
 
 
 " ---------------------------------------------------------------------------
@@ -274,8 +274,8 @@ endf
 "
 "  return -- 1 if the bundle is pinned, 0 otherwise
 " ---------------------------------------------------------------------------
-func! s:bundle.is_pinned()
+function! s:bundle.is_pinned()
   return get(self, 'pinned')
-endf
+endfunction
 
 " vim: set expandtab sts=2 ts=2 sw=2 tw=78 norl:
