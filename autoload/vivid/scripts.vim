@@ -191,21 +191,21 @@ function! vivid#scripts#view(title, headers, results)
   syn keyword vimCommand Bundle
   syn keyword vimCommand Helptags
 
-  com! -buffer -bang -nargs=1 DeletePlugin
+  command!  -buffer -bang -nargs=1 DeletePlugin
     \ call vivid#installer#run('vivid#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
 
-  com! -buffer -bang -nargs=? InstallAndRequirePlugin
+  command!  -buffer -bang -nargs=? InstallAndRequirePlugin
     \ call vivid#installer#run('vivid#installer#install_and_require', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
-  com! -buffer -bang -nargs=? InstallPlugin
+  command!  -buffer -bang -nargs=? InstallPlugin
     \ call vivid#installer#run('vivid#installer#install', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
-  com! -buffer -bang -nargs=0 InstallHelptags
+  command!  -buffer -bang -nargs=0 InstallHelptags
     \ call vivid#installer#run('vivid#installer#docs', 'helptags', [])
 
-  com! -buffer -nargs=0 VividLog call s:view_log()
+  command!  -buffer -nargs=0 VividLog call s:view_log()
 
-  com! -buffer -nargs=0 VividChangelog call s:view_changelog()
+  command!  -buffer -nargs=0 VividChangelog call s:view_changelog()
 
   nnoremap <silent> <buffer> q :silent bd!<CR>
   nnoremap <silent> <buffer> D :execute 'Delete'.getline('.')<CR>

@@ -34,13 +34,13 @@ command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginIns
 " purposes.
 "
 " Deprecated Commands
-"com! -nargs=+                                                Bundle        call vundle#config#bundle(<args>)
-"com! -nargs=? -bang -complete=custom,vundle#scripts#complete BundleInstall PluginInstall<bang> <args>
-"com! -nargs=? -bang -complete=custom,vundle#scripts#complete BundleSearch  PluginSearch<bang> <args>
-"com! -nargs=0 -bang                                          BundleList    PluginList<bang>
-"com! -nargs=? -bang                                          BundleClean   PluginClean<bang>
-"com! -nargs=0                                                BundleDocs    PluginDocs
-"com!                                                         BundleUpdate  PluginInstall!
+"command!  -nargs=+                                                Bundle        call vundle#config#bundle(<args>)
+"command!  -nargs=? -bang -complete=custom,vundle#scripts#complete BundleInstall PluginInstall<bang> <args>
+"command!  -nargs=? -bang -complete=custom,vundle#scripts#complete BundleSearch  PluginSearch<bang> <args>
+"command!  -nargs=0 -bang                                          BundleList    PluginList<bang>
+"command!  -nargs=? -bang                                          BundleClean   PluginClean<bang>
+"command!  -nargs=0                                                BundleDocs    PluginDocs
+"command!                                                          BundleUpdate  PluginInstall!
 
 " Set up the signs used in the installer window. (See :help signs)
 if (has('signs'))
