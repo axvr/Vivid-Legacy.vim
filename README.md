@@ -133,6 +133,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Rebrand Vundle fork to Vivid
 * [x] Rename components
 * [ ] Remove redundant code
+* [x] Improve human readability of source
 * [ ] Modularise the Vundle base
 * [ ] Add full Neovim support
 * [ ] Replace and modernise Vundle base

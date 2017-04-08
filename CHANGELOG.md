@@ -60,6 +60,7 @@ Leave 3 lines between previous change log item -->
 * Rebranded most of Vundle to Vivid
 * Remade ``README.md`` for Vivid
 * Improved auto install
+* Improved readability of section of the code
 
 ### Removed
 * Old ``README_ZH_--.md`` files
