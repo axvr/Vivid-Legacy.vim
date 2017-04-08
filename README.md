@@ -129,7 +129,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [Vivid] is a fork of Vundle, this has resulted in it becoming a major work in progress.
 
 * [x] Restructure repository
-* [ ] Restructure files
+* [x] Restructure files
 * [x] Rebrand Vundle fork to Vivid
 * [x] Rename components
 * [ ] Remove redundant code
@@ -144,7 +144,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] Add update and install progress bar (for YCM especially)
 * [ ] Add support for switching and testing between http:// git:// & https://
 * [ ] Add support for Mercurial repos
-* [ ] Increase security and mitigate MITM attacks
+* [x] Increase security and mitigate MITM attacks
 * [ ] Allow users to choose to update using latest commit or tag
 * [ ] Comment all of the code
 * [ ] Improve documentation
@@ -154,7 +154,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] Fix plugin repo deletion bug where credentials are required
 * [ ] Make a Github 'organisation' for contributers to join & get commit access
 * [ ] Replace old README and vim help menu
-* [ ] Improve the test files from Vundle
+* [x] Improve the test files from Vundle
 * [x] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
   * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`

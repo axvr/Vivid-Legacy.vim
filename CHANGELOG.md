@@ -51,6 +51,7 @@ Leave 3 lines between previous change log item -->
 * New Neovim ``init.vim`` test file
 * Todo list in ``README.md`` and project goals
 * Default downloads to ``https``
+* Toggle search term highlighting
 
 ### Changed
 * Forked from Vundle/Vundle.vim
