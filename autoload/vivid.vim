@@ -1,10 +1,10 @@
-" =============================================================================
+" =================================================================================
 " Name:         Vivid.vim
 " Author:       Alex Vear
-" HomePage:     http://github.com/axvr/Vivid.vim
-" Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
+" HomePage:     http://github.com/VividVim/Vivid-Legacy.vim
+" Readme:       http://github.com/VividVim/Vivid-Legacy.vim/blob/master/README.md
 " Version:      0.10.2
-" =============================================================================
+" =================================================================================
 
 
 " Plugin Commands

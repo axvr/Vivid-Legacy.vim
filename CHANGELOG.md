@@ -1,4 +1,4 @@
-# Vivid.vim Change Log
+# Vivid-Legacy.vim Change Log
 
 History of all of the changes made to this project
 

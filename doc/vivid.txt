@@ -1,6 +1,6 @@
 vivid*vivid.txt*          Vivid, a plug-in manager for Vim.             *vivid*
 
-                              VUNDLE MANUAL
+                              VIVID MANUAL
 
 1. About Vivid                                    |vivid-about|
 2. Quick Start                                     |vivid-quickstart|
@@ -18,7 +18,7 @@ vivid*vivid.txt*          Vivid, a plug-in manager for Vim.             *vivid*
 7. Plugin Interface Change                         |vivid-interface-change|
 
 =============================================================================
-1. ABOUT VUNDLE ~
+1. ABOUT VIVID ~
                                                                *vivid-about*
 
 Vivid is short for Vim bundle and is a Vim plugin manager.
@@ -383,7 +383,7 @@ KEY | DESCRIPTION
     Plugin 'sjl/gundo.vim' -> git@github.com:sjl/gundo.git
 
 =============================================================================
-7. VUNDLE INTERFACE CHANGE ~
+7. VIVID INTERFACE CHANGE ~
                         *vundle-interface-change* *:Bundle* *:BundleInstall!*
                 *:BundleUpdate* *:BundleSearch* *:BundleList* *:BundleClean!*
                             *:VividInstall!* *:VividUpdate* *:VividSearch*
