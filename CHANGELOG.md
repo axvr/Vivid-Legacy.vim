@@ -44,7 +44,7 @@ Leave 3 lines between previous change log item -->
 
 ---
 
-## [Unreleased] - 2017-04-06
+## [0.10.5] - 2017-04-12
 
 ### Added
 * New test vimrc file with Vivid auto install
@@ -52,6 +52,7 @@ Leave 3 lines between previous change log item -->
 * Todo list in ``README.md`` and project goals
 * Default downloads to ``https``
 * Toggle search term highlighting
+* New screenshot of Vivid
 
 ### Changed
 * Forked from Vundle/Vundle.vim
@@ -60,7 +61,9 @@ Leave 3 lines between previous change log item -->
 * Rebranded most of Vundle to Vivid
 * Remade ``README.md`` for Vivid
 * Improved auto install
-* Improved readability of section of the code
+* Improved readability of the code
+* Updated version info
+* Vundle Disconnect has happened
 
 ### Removed
 * Old ``README_ZH_--.md`` files

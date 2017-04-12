@@ -3,7 +3,7 @@
 **Vivid is the Next-Gen Vim Package Manager**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.2-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.5-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/LICENCE)
 
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
@@ -134,27 +134,26 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Rename components
 * [ ] Remove redundant code
 * [x] Improve human readability of source
-* [ ] Modularise the Vundle base
-* [ ] Add full Neovim support
-* [ ] Replace and modernise Vundle base
+* [ ] Add full Neovim support ([in progress])
+* [ ] Replace and modernise Vundle base ([in progress])
 * [ ] Improve involvement from the community
-* [ ] Speed up and optimise the plugin manager
-* [ ] Fix all of the bugs in Vundle base
-* [ ] Improve Windows support
-* [ ] Add GitLab support (maybe add BitBucket support)
+* [ ] Speed up and optimise the plugin manager ([in progress])
+* [ ] Fix the bugs in Vundle base
+* [ ] Improve Windows support ([in progress])
+* [ ] Add GitLab support (maybe add BitBucket support) ([in progress])
 * [ ] Add update and install progress bar (for YCM especially)
-* [ ] Add support for switching and testing between http:// git:// & https://
-* [ ] Add support for Mercurial repos
+* [ ] Add support for switching and testing between http:// git:// & https:// ([in progress])
+* [ ] Add support for Mercurial repos ([in progress])
 * [x] Increase security and mitigate MITM attacks
-* [ ] Allow users to choose to update using latest commit or tag
-* [ ] Comment all of the code
-* [ ] Improve documentation
+* [ ] Allow users to choose to update using latest commit or tag ([in progress])
+* [ ] Comment all of the code ([in progress])
+* [ ] Improve documentation ([in progress])
 * [x] Highlight search term option
 * [ ] Add multi-language support
-* [ ] Disconnect from Vundle upstream
-* [ ] Fix plugin repo deletion bug where credentials are required
-* [ ] Make a Github 'organisation' for contributers to join & get commit access
-* [ ] Replace old README and vim help menu
+* [x] Disconnect from Vundle upstream
+* [ ] Fix plugin repo deletion bug where credentials are required ([in progress])
+* [x] Make a Github 'organisation' for contributers to join & get commit access
+* [x] Replace old README and vim help menu
 * [x] Improve the test files from Vundle
 * [x] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
@@ -184,6 +183,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [runtime path]:http://vimdoc.sourceforge.net/htmldoc/options.html#%27runtimepath%27
 [Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
 [Vivid contributors]:https://github.com/VividVim/Vivid-Legacy.vim/graphs/contributors
+[in progress]:https://github.com/VividVim/Vivid.vim/
 
 <!--
   Old Vundle Vimrc Example:

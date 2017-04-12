@@ -3,7 +3,7 @@
 " Author:       Alex Vear
 " HomePage:     http://github.com/VividVim/Vivid-Legacy.vim
 " Readme:       http://github.com/VividVim/Vivid-Legacy.vim/blob/master/README.md
-" Version:      0.10.2
+" Version:      0.10.5
 " =================================================================================
 
 
