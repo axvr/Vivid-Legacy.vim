@@ -6,8 +6,6 @@
 [![Version Badge](https://img.shields.io/badge/Version-v0.10.6-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/LICENCE)
 
-**The Vivid project is currently unmaintained due to the core developer currently being "Among the stars aboard the Evil flagship" within Spacemacs.**
-
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
 features of Vundle, to make the most powerful Plugin manager, possible.
 Vivid's main goal is to become fully cross platform, so that it can work as
