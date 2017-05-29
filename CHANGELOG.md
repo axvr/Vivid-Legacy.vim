@@ -44,6 +44,14 @@ Leave 3 lines between previous change log item -->
 
 ---
 
+## [0.10.6] - 2017-05-29
+
+### Removed
+* Search and highlighting search features making Vivid-Legacy more lightweight
+* Removed other minor sectons of redundant code
+
+
+
 ## [0.10.5] - 2017-04-12
 
 ### Added

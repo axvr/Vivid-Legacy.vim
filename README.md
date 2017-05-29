@@ -3,10 +3,10 @@
 **Vivid is the Next-Gen Vim Package Manager**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.5-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.6-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/LICENCE)
 
-**The Vivid project is currently unmaintained due to the core developer currently being "Among the stars aboard the Evil flagship" within Spacemacs.** 
+**The Vivid project is currently unmaintained due to the core developer currently being "Among the stars aboard the Evil flagship" within Spacemacs.**
 
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
 features of Vundle, to make the most powerful Plugin manager, possible.
@@ -76,7 +76,6 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 
       " The following are examples of different formats supported.
       "Plugin 'tpope/vim-fugitive' " Plugin from GitHub
-      "Plugin 'L9' " Plugin from http://vim-scripts.org/vim/scripts.html
       "Plugin 'git://git.wincent.com/command-t.git' " Git plugin not on GitHub
       "Plugin 'file:///home/user/path/to/plugin' Local git plugins
       "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} " Plugin is in a GitHub subdirectory
