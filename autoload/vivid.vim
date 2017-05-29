@@ -14,12 +14,8 @@ command! -nargs=+  -bar   Plugin
 command! -nargs=* -bang -complete=custom,vivid#scripts#complete PluginInstall
 \ call vivid#installer#new('!' == '<bang>', <f-args>)
 
-" Maybe remove Search functionality from Vivid
-command! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
-\ call vivid#scripts#all('!' == '<bang>', <q-args>)
-
-command! -nargs=0 -bang PluginList
-\ call vivid#installer#list('!' == '<bang>')
+""command! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
+""\ call vivid#scripts#all('!' == '<bang>', <q-args>)
 
 command! -nargs=? -bang   PluginClean
 \ call vivid#installer#clean('!' == '<bang>')
@@ -30,17 +26,6 @@ command! -nargs=0         PluginDocs
 " Aliases
 command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
 
-" These will be removed and replaced, they are currently here for reference
-" purposes.
-"
-" Deprecated Commands
-"command!  -nargs=+                                                Bundle        call vundle#config#bundle(<args>)
-"command!  -nargs=? -bang -complete=custom,vundle#scripts#complete BundleInstall PluginInstall<bang> <args>
-"command!  -nargs=? -bang -complete=custom,vundle#scripts#complete BundleSearch  PluginSearch<bang> <args>
-"command!  -nargs=0 -bang                                          BundleList    PluginList<bang>
-"command!  -nargs=? -bang                                          BundleClean   PluginClean<bang>
-"command!  -nargs=0                                                BundleDocs    PluginDocs
-"command!                                                          BundleUpdate  PluginInstall!
 
 " Set up the signs used in the installer window. (See :help signs)
 if (has('signs'))

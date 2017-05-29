@@ -1,48 +1,4 @@
 " ---------------------------------------------------------------------------
-" Search the database from vim-script.org for a matching plugin.  If no
-" argument is given, list all plugins. This function is used by the :Plugins
-" and :PluginSearch commands.
-"
-" bang -- if 1 refresh the script name cache, if 0 don't
-" ...  -- a plugin name to search for
-" ---------------------------------------------------------------------------
-function! vivid#scripts#all(bang, ...)
-  let b:match = ''
-  let info = ['"Keymap: i - Install plugin; c - Cleanup; s - Search; R - Reload list; N - Toggle highlight search term']
-  let matches = s:load_scripts(a:bang)
-  if !empty(a:1)
-    let matches = filter(matches, 'v:val =~? "'.escape(a:1,'"').'"')
-    let info += ['"Search results for: '.a:1]
-    " TODO: highlight matches
-    let g:search_term = a:1
-    let b:match = a:1
-  endif
-  call vivid#scripts#view('search',info, vivid#scripts#bundle_names(reverse(matches)))
-  redraw
-  " Highlight search term (temporary)
-  "let _s=@/
-  "if len(a:1) > 0
-    "let @/=''
-    "let @/=a:1
-    "set hls
-    "call feedkeys("n")
-  "endif
-  echo len(matches).' plugins found'
-  "let @/=_s
-  "unlet _s
-endfunction
-
-
-" ---------------------------------------------------------------------------
-" Repeat the search for bundles.
-" ---------------------------------------------------------------------------
-function! vivid#scripts#reload() abort
-  silent execute ':PluginSearch! '.(exists('b:match') ? b:match : '')
-  redraw
-endfunction
-
-
-" ---------------------------------------------------------------------------
 " Complete names for bundles in the command line.
 "
 " a, c, d -- see :h command-completion-custom
@@ -224,93 +180,11 @@ function! vivid#scripts#view(title, headers, results)
   nnoremap <silent> <buffer> c :PluginClean<CR>
   nnoremap <silent> <buffer> C :PluginClean!<CR>
 
-  nnoremap <buffer> s :PluginSearch
   nnoremap <silent> <buffer> R :call vivid#scripts#reload()<CR>
-
-  nnoremap <silent> <buffer> N :call vivid#scripts#highlight_terms(g:search_term)<CR>
 
   " goto first line after headers
   execute ':'.(len(a:headers) + 1)
 endfunction
 
-
-" ---------------------------------------------------------------------------
-" Toggle Highlight all search terms
-" ---------------------------------------------------------------------------
-function! vivid#scripts#highlight_terms(term)
-
-  if len(a:term) > 0
-    "let _s=@/
-    let @/=''
-    let @/=a:term
-    "if set hls? == "hlsearch"
-    "  set nohls
-    "elseif set hls? == "nohlsearch"
-    "  set hls
-    "endif
-    set hlsearch!
-    call feedkeys('n')
-    "let @/=_s
-    "unlet _s
-  endif
-  "let @/=''
-
-endfunction
-
-
-" ---------------------------------------------------------------------------
-" Load the plugin database from vim-scripts.org .
-"
-" to     -- the filename (string) to save the database to
-" return -- 0 on success, 1 if an error occurred
-" ---------------------------------------------------------------------------
-function! s:fetch_scripts(to)
-  let scripts_dir = fnamemodify(expand(a:to, 1), ":h")
-  if !isdirectory(scripts_dir)
-    call mkdir(scripts_dir, "p")
-  endif
-
-  let l:vim_scripts_json = 'https://raw.githubusercontent.com/vim-scraper/vim-scraper.github.com/master/api/scripts.json'
-  if executable("curl")
-    let cmd = 'curl --fail -s -o '.vivid#installer#shellesc(a:to).' '.l:vim_scripts_json
-  elseif executable("wget")
-    let temp = vivid#installer#shellesc(tempname())
-    let cmd = 'wget -q -O '.temp.' '.l:vim_scripts_json. ' && mv -f '.temp.' '.vivid#installer#shellesc(a:to)
-    if (has('win32') || has('win64'))
-      let cmd = substitute(cmd, 'mv -f ', 'move /Y ', '') " change force flag
-      let cmd = vivid#installer#shellesc(cmd)
-    end
-  else
-    echoerr 'Error curl or wget is not available!'
-    return 1
-  endif
-
-  call system(cmd)
-
-  if (0 != v:shell_error)
-    echoerr 'Error fetching scripts!'
-    return v:shell_error
-  endif
-  return 0
-endfunction
-
-
-" ---------------------------------------------------------------------------
-" Load the plugin database and return a list of all plugins.
-"
-" bang   -- if 1 download the redatabase, else only download if it is not
-"           readable on disk (i.e. does not exist)
-" return -- a list of strings, these are the names (valid bundle
-"           specifications) of all plugins from vim-scripts.org
-" ---------------------------------------------------------------------------
-function! s:load_scripts(bang)
-  let f = expand(g:vivid#bundle_dir.'/.vivid/script-names.vim-scripts.org.json', 1)
-  if a:bang || !filereadable(f)
-    if 0 != s:fetch_scripts(f)
-      return []
-    end
-  endif
-  return eval(readfile(f, 'b')[0])
-endfunction
 
 " vim: set expandtab sts=2 ts=2 sw=2 tw=78 norl:

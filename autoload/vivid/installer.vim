@@ -217,20 +217,6 @@ endfunction
 
 
 " ---------------------------------------------------------------------------
-" List all installed plugins.
-" Corresponding documentation: vivid-plugins-list
-"
-" bang   -- not used
-" ---------------------------------------------------------------------------
-function! vivid#installer#list(bang) abort
-  let bundles = vivid#scripts#bundle_names(map(copy(g:vivid#bundles), 'v:val.name_spec'))
-  call vivid#scripts#view('list', ['" My Plugins'], bundles)
-  redraw
-  echo len(g:vivid#bundles).' plugins configured'
-endfunction
-
-
-" ---------------------------------------------------------------------------
 " List and remove all directories in the bundle directory which are not
 " activated (added to the bundle list).
 "
