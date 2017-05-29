@@ -131,11 +131,10 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Restructure files
 * [x] Rebrand Vundle fork to Vivid
 * [x] Rename components
-* [ ] Remove redundant code
+* [x] Remove redundant code
 * [x] Improve human readability of source
 * [ ] Add full Neovim support ([in progress])
-* [ ] Replace and modernise Vundle base ([in progress])
-* [ ] Improve involvement from the community
+* [ ] Replace and modernise the old Vundle base ([in progress])
 * [ ] Speed up and optimise the plugin manager ([in progress])
 * [ ] Fix the bugs in Vundle base
 * [ ] Improve Windows support ([in progress])
@@ -145,9 +144,9 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] Add support for Mercurial repos ([in progress])
 * [x] Increase security and mitigate MITM attacks
 * [ ] Allow users to choose to update using latest commit or tag ([in progress])
-* [ ] Comment all of the code ([in progress])
+* [x] Comment all of the code ([in progress])
 * [ ] Improve documentation ([in progress])
-* [x] Highlight search term option
+* [x] Remove search for plugins
 * [ ] Add multi-language support
 * [x] Disconnect from Vundle upstream
 * [ ] Fix plugin repo deletion bug where credentials are required ([in progress])
@@ -164,8 +163,8 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
   * [x] improve error handling
   * [ ] allow specifying revision/version?
   * [ ] handle dependencies
-  * [ ] show description in search results
-  * [ ] search by description as well
+  * [x] show description in search results (removed search feature)
+  * [x] search by description as well (removed search feature)
   * [ ] make it rock!
 * [ ] And many more things
 
