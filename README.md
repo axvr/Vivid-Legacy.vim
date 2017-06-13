@@ -20,7 +20,6 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 * Configure your plugins right in your ``~/.vimrc``
 * Install configured plugins (a.k.a. scripts/bundle)
 * Update configured plugins
-* Search by name all available [Vim scripts]
 * Clean unused plugins up
 * Run the above actions in a *single keypress* with interactive mode
 
@@ -47,7 +46,6 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
     " :PluginList       - Lists all configured plugins
     " :PluginUpdate     - Update all plugins to latest versions
     " :PluginInstall    - Installs plugins; append `!` to update or just :PluginUpdate
-    " :PluginSearch foo - Searches for foo; append `!` to refresh local cache
     " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
     " :help vivid       - View documentation from within Vim
 
@@ -224,7 +222,6 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
    " Brief help
    " :PluginList       - lists configured plugins
    " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-   " :PluginSearch foo - searches for foo; append `!` to refresh local cache
    " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
    "
    " see :h vundle for more details or wiki for FAQ
@@ -238,7 +235,6 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
   [configure]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L126-L233
   [install]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L234-L254
   [update]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
-  [search]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L266-L295
   [clean]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L303-L318
   [interactive mode]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L319-L360
   [interface change]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L372-L396
