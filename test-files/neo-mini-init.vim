@@ -1,7 +1,7 @@
 filetype off
-set rtp+=~/.vim/bundle/Vivid.vim/
+set rtp+=~/.vim/bundle/Vivid-Legacy.vim/
 call vivid#begin()
-Plugin 'axvr/Vivid.vim'
+Plugin 'VividVim/Vivid-Legacy.vim'
 call vivid#end()
 filetype plugin indent on
 

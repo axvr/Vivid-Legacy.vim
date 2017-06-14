@@ -144,7 +144,6 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] Allow users to choose to update using latest commit or tag ([in progress])
 * [x] Comment all of the code ([in progress])
 * [ ] Improve documentation ([in progress])
-* [x] Remove search for plugins
 * [ ] Add multi-language support
 * [x] Disconnect from Vundle upstream
 * [ ] Fix plugin repo deletion bug where credentials are required ([in progress])
@@ -154,10 +153,10 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
   * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
-  * [x] use preview window for search results
+  * [x] ~use preview window for search results~ (Removed search feature)
   * [x] Vim documentation
   * [x] put Vundle in `bundles/` too (will fix Vundle help)
-  * [x] tests
+  * [x] test files
   * [x] improve error handling
   * [ ] allow specifying revision/version?
   * [ ] handle dependencies
