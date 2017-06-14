@@ -161,8 +161,8 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
   * [x] improve error handling
   * [ ] allow specifying revision/version?
   * [ ] handle dependencies
-  * [x] show description in search results (removed search feature)
-  * [x] search by description as well (removed search feature)
+  * [x] ~show description in search results~ (removed search feature)
+  * [x] ~search by description as well~ (removed search feature)
   * [ ] make it rock!
 * [ ] And many more things
 
