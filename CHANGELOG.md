@@ -44,6 +44,16 @@ Leave 3 lines between previous change log item -->
 
 ---
 
+## [0.10.7] - 2017-06-19
+
+### Added
+* Full backwards compatibility with Vundle. Vivid will now act as a drop in replacement
+
+### Changed
+* Moved some of the commands from the ```.vimrc``` into Vivid, aiding in usability improvements
+
+
+
 ## [0.10.6] - 2017-05-29
 
 ### Removed

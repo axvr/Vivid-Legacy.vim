@@ -3,7 +3,7 @@
 " Author:       Alex Vear
 " HomePage:     http://github.com/VividVim/Vivid-Legacy.vim
 " Readme:       http://github.com/VividVim/Vivid-Legacy.vim/blob/master/README.md
-" Version:      0.10.5
+" Version:      0.10.7
 " =================================================================================
 
 
@@ -14,8 +14,8 @@ command! -nargs=+  -bar   Plugin
 command! -nargs=* -bang -complete=custom,vivid#scripts#complete PluginInstall
 \ call vivid#installer#new('!' == '<bang>', <f-args>)
 
-""command! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
-""\ call vivid#scripts#all('!' == '<bang>', <q-args>)
+"command! -nargs=? -bang -complete=custom,vivid#scripts#complete PluginSearch
+"\ call vivid#scripts#all('!' == '<bang>', <q-args>)
 
 command! -nargs=? -bang   PluginClean
 \ call vivid#installer#clean('!' == '<bang>')
@@ -45,9 +45,23 @@ endif
 " :Plugin command in the vimrc.  It is not possible to do this automatically
 " because when loading the vimrc file no plugins where loaded yet.
 
+function! vivid#prepare() abort
+  set nocompatible
+  filetype off
+  if !exists("g:syntax_on")
+    syntax enable
+  endif
+endfunction
+
+function! vivid#finish() abort
+  filetype plugin indent on
+endfunction
+
+
 " Alternative to vivid#rc, offers speed up by modifying rtp (RunTimePath) only when end()
 " called later.
 function! vivid#open(...) abort
+  call vivid#prepare()
   let g:vivid#lazy_load = 1
   if a:0 > 0
     let g:vivid#bundle_dir = expand(a:1, 1)
@@ -59,7 +73,19 @@ endfunction
 function! vivid#close(...) abort
   unlet g:vivid#lazy_load
   call vivid#config#activate_bundles()
+  call vivid#finish()
 endfunction
+
+
+" Add backwards compatibility with Vundle
+function! vundle#begin(...) abort
+  call call('vivid#open', a:000)
+endfunction
+
+function! vundle#end(...) abort
+  call call('vivid#close', a:000)
+endfunction
+
 
 " Initialize some global variables used by Vivid.
 let vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
@@ -67,3 +93,4 @@ let vivid#bundles = []
 let vivid#lazy_load = 0
 let vivid#log = []
 let vivid#updated_bundles = []
+

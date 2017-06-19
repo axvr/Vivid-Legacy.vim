@@ -3,7 +3,7 @@
 **Vivid is the Next-Gen Vim Package Manager**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.6-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.7-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/LICENCE)
 
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
@@ -153,7 +153,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Attempt to use ``https`` before ``http``
 * [ ] Finish what Vundle set out to do:
   * [x] activate newly added bundles on `.vimrc` reload or after `:PluginInstall`
-  * [x] ~use preview window for search results~ (Removed search feature)
+  * [x] ~use preview window for search results~ (removed search feature)
   * [x] Vim documentation
   * [x] put Vundle in `bundles/` too (will fix Vundle help)
   * [x] test files
