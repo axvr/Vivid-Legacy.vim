@@ -77,16 +77,6 @@ function! vivid#close(...) abort
 endfunction
 
 
-" Add backwards compatibility with Vundle
-function! vundle#begin(...) abort
-  call call('vivid#open', a:000)
-endfunction
-
-function! vundle#end(...) abort
-  call call('vivid#close', a:000)
-endfunction
-
-
 " Initialize some global variables used by Vivid.
 let vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
 let vivid#bundles = []
