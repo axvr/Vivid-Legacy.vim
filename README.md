@@ -135,6 +135,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] Replace and modernise the old Vundle base ([in progress])
 * [ ] Speed up and optimise the plugin manager ([in progress])
 * [ ] Fix the bugs in Vundle base
+* [x] Vundle backwards compatibility via emulation
 * [ ] Improve Windows support ([in progress])
 * [ ] Add GitLab support (maybe add BitBucket support) ([in progress])
 * [ ] Add update and install progress bar (for YCM especially)

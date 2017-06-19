@@ -27,18 +27,6 @@ command! -nargs=0         PluginDocs
 command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
 
 
-" Set up the signs used in the installer window. (See :help signs)
-if (has('signs'))
-  sign define Vv_error    text=!  texthl=Error
-  sign define Vv_active   text=>  texthl=Comment
-  sign define Vv_todate   text=.  texthl=Comment
-  sign define Vv_new      text=+  texthl=Comment
-  sign define Vv_updated  text=*  texthl=Comment
-  sign define Vv_deleted  text=-  texthl=Comment
-  sign define Vv_helptags text=H  texthl=Comment
-  sign define Vv_pinned   text==  texthl=Comment
-endif
-
 " Set up Vivid.  This function has to be called from the users vimrc file.
 " This will force Vim to source this file as a side effect which wil define
 " the :Plugin command.  After calling this function the user can use the
@@ -61,15 +49,19 @@ endfunction
 " Alternative to vivid#rc, offers speed up by modifying rtp (RunTimePath) only when end()
 " called later.
 function! vivid#open(...) abort
+
   call vivid#prepare()
+  call vivid#defineVars()
+
   let g:vivid#lazy_load = 1
   if a:0 > 0
     let g:vivid#bundle_dir = expand(a:1, 1)
   endif
   call vivid#config#init()
+
 endfunction
 
-" Finishes putting plugins on the rtp.
+" Finishes appending plugins to the rtp.
 function! vivid#close(...) abort
   unlet g:vivid#lazy_load
   call vivid#config#activate_bundles()
@@ -77,10 +69,25 @@ function! vivid#close(...) abort
 endfunction
 
 
-" Initialize some global variables used by Vivid.
-let vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
-let vivid#bundles = []
-let vivid#lazy_load = 0
-let vivid#log = []
-let vivid#updated_bundles = []
+function! vivid#defineVars()
+  " Initialize some global variables used by Vivid.
+  let g:vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
+  let g:vivid#bundles = []
+  let g:vivid#lazy_load = 0
+  let g:vivid#log = []
+  let g:vivid#updated_bundles = []
+endfunction
+
+
+" Set up the signs used in the installer window. (See :help signs)
+if (has('signs'))
+  sign define Vv_error    text=!  texthl=Error
+  sign define Vv_active   text=>  texthl=Comment
+  sign define Vv_todate   text=.  texthl=Comment
+  sign define Vv_new      text=+  texthl=Comment
+  sign define Vv_updated  text=*  texthl=Comment
+  sign define Vv_deleted  text=-  texthl=Comment
+  sign define Vv_helptags text=H  texthl=Comment
+  sign define Vv_pinned   text==  texthl=Comment
+endif
 
