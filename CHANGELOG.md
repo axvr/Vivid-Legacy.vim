@@ -51,6 +51,7 @@ Leave 3 lines between previous change log item -->
 
 ### Changed
 * Moved some of the commands from the ```.vimrc``` into Vivid, aiding in usability improvements
+* Core variables moved to a function to improve robustness of core code
 
 
 

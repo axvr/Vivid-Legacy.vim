@@ -1,17 +1,17 @@
-# Vivid-Legacy.vim
+# Vivid.vim
 
 **Vivid is the Next-Gen Vim Package Manager**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.7-brightgreen.svg)](https://github.com/VividVim/Vivid-Legacy.vim/releases)
-[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/LICENCE)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.7-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
+[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid.vim/blob/master/LICENCE)
 
 Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
 features of Vundle, to make the most powerful Plugin manager, possible.
 Vivid's main goal is to become fully cross platform, so that it can work as
 expected on all systems and Vim derivatives, including Neovim and Windows.
 
-If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/CODE_OF_CONDUCT.md).
+If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document](https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md).
 
 ## About
 
@@ -49,26 +49,23 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
     " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
     " :help vivid       - View documentation from within Vim
 
-    set nocompatible    " Remove Vi backwards compatibility
-    syntax on           " Enable syntax highlighting
-    filetype off        " Temporarily disable the 'filetype' setting
 
     " Auto Install Vivid and Plugins
-    let vivid_checkfile=expand('~/.vim/bundle/Vivid-Legacy.vim/test-files/checkfile.txt')
+    let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
     if (!filereadable(vivid_checkfile))
       echo "Installing Vivid.vim & plugins"
-      silent !git clone https://github.com/VividVim/Vivid-Legacy.vim.git ~/.vim/bundle/Vivid.vim
+      silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
       :source $MYVIMRC
       :PluginInstall
       :source $MYVIMRC
       :q
     endif
 
-    set rtp+=~/.vim/bundle/Vivid-Legacy.vim/ " Append Vivid to the runtimepath
+    set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
     call vivid#open()
     " Input Plugins Below this Line
 
-      Plugin 'VividVim/Vivid-Legacy.vim' " let Vivid manage Vivid (Do not remove)
+      Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid (Do not remove)
 
       " The following are examples of different formats supported.
       "Plugin 'tpope/vim-fugitive' " Plugin from GitHub
@@ -79,7 +76,6 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 
     " Input Plugins Above this Line
     call vivid#close()
-    filetype plugin indent on   " Enable 'filetype' seting
 
     " Continue Vimrc after this line
     ```
@@ -110,7 +106,7 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
     Launch ``vim`` and run ``:PluginUpdate``
 
 
-See the [``:help vivid``](https://github.com/VividVim/Vivid-Legacy.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
+See the [``:help vivid``](https://github.com/axvr/Vivid.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
 
 See the [changelog]
 
@@ -167,9 +163,9 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] And many more things
 
 
-[Vivid]:https://github.com/VividVim/Vivid-Legacy.vim/
+[Vivid]:https://github.com/axvr/Vivid.vim/
 [Vundle]:https://github.com/VundleVim/Vundle.vim/
-[changelog]:https://github.com/VividVim/Vivid-Legacy.vim/blob/master/CHANGELOG.md/
+[changelog]:https://github.com/axvr/Vivid.vim/blob/master/CHANGELOG.md/
 [Vim]:http://www.vim.org
 [Git]:http://git-scm.com
 [``git clone``]:http://gitref.org/creating/#clone
@@ -178,8 +174,8 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [help tags]:http://vimdoc.sourceforge.net/htmldoc/helphelp.html#:helptags
 [runtime path]:http://vimdoc.sourceforge.net/htmldoc/options.html#%27runtimepath%27
 [Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
-[Vivid contributors]:https://github.com/VividVim/Vivid-Legacy.vim/graphs/contributors
-[in progress]:https://github.com/VividVim/Vivid.vim/
+[Vivid contributors]:https://github.com/axvr/Vivid.vim/graphs/contributors
+[in progress]:https://github.com/axvr/Vivid.vim/
 
 <!--
   Old Vundle Vimrc Example:

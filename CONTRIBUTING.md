@@ -3,7 +3,7 @@ Pull Requests
 
 1. Please squash your commits to minimize the log pollution. This is more of a convenience for the maintainer who pulls. If you are unfamiliar, see [here](http://ariejan.net/2011/07/05/git-squash-your-latests-commits-into-one/).
 
-2. Clearly describe what you aim to fix or add to Vundle.
+2. Clearly describe what you aim to fix or add to Vivid.
 
 3. Try to minimize code changes and use existing style/functions.
 
@@ -14,15 +14,16 @@ Issues
 
 Before submitting an issue, be sure to check the following places for answers.
 
-1. Vundle docs at [`:h vundle`](https://github.com/VundleVim/Vundle.vim/blob/master/doc/vundle.txt).
+1. Vivid docs at [`:h vivid`](https://github.com/axvr/Vivid.vim/blob/master/doc/vivid.txt).
 
-2. The [FAQ](https://github.com/VundleVim/Vundle.vim/wiki).
+2. The Vundle [FAQ](https://github.com/VundleVim/Vundle.vim/wiki).
 
-3. [Search](https://github.com/VundleVim/Vundle.vim/search) the repository for related issues.
+3. [Search](https://github.com/axvr/Vivid.vim/search) the repository for related issues.
+
 
 ## Try To Eliminate Your Vimrc
 
-In order to make sure it isn't just `.vimrc` replace your own config file with the [minimal vimrc](https://github.com/VundleVim/Vundle.vim/blob/master/test/minirc.vim). Clear out bundles and then try to reproduce.
+In order to make sure it isn't just `.vimrc` replace your own config file with the [minimal vimrc](https://github.com/axvr/Vivid.vim/blob/master/test-files/mini-vimrc.vim). Clear out bundles and then try to reproduce.
 
 If the problem stops, likely there is an issue in your user configuration. You can incrementally add back your user changes to the minimal file testing the bug each time. This will allow you to slowly bisect the issue. You may want to test one plugin at a time.
 

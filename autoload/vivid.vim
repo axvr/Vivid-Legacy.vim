@@ -1,8 +1,8 @@
 " =================================================================================
 " Name:         Vivid.vim
 " Author:       Alex Vear
-" HomePage:     http://github.com/VividVim/Vivid-Legacy.vim
-" Readme:       http://github.com/VividVim/Vivid-Legacy.vim/blob/master/README.md
+" HomePage:     http://github.com/axvr/Vivid.vim
+" Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
 " Version:      0.10.7
 " =================================================================================
 
@@ -90,4 +90,5 @@ if (has('signs'))
   sign define Vv_helptags text=H  texthl=Comment
   sign define Vv_pinned   text==  texthl=Comment
 endif
+
 
