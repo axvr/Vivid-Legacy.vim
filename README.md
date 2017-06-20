@@ -213,7 +213,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
 [Vivid contributors]:https://github.com/axvr/Vivid.vim/graphs/contributors
 [in progress]:https://github.com/axvr/Vivid.vim/
-[Using Vivid]:https://github.com/axvr/Vivid.vim#using-vivid
+[Using Vivid]:https://github.com/axvr/Vivid.vim#using-vivid-and-the-myvimrc-file
 [Code of Conduct]:https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md
 [contributing document]:https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md
 
