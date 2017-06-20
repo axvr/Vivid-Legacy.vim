@@ -74,7 +74,7 @@ Leave 3 lines between previous change log item -->
 
 ### Removed
 * Search and highlighting search features making Vivid-Legacy more lightweight
-* Removed other minor sectons of redundant code
+* Removed other minor sections of redundant code
 
 
 
@@ -97,7 +97,7 @@ Leave 3 lines between previous change log item -->
 * Improved auto install
 * Improved readability of the code
 * Updated version info
-* Vundle Disconnect has happened
+* Vundle Upstream disconnect has happened
 
 ### Removed
 * Old ``README_ZH_--.md`` files

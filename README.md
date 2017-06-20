@@ -6,7 +6,7 @@
 [![Version Badge](https://img.shields.io/badge/Version-v0.10.8-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid.vim/blob/master/LICENCE)
 
-Vivid is a fork of the Vundle plugin manager for Vim. Vivid aims to extend and simplify the features of Vundle, to make a more powerful Plugin manager.
+[Vivid] is a fork of [Vundle] a [Vim] plugin manager. Vivid aims to extend and simplify the features of Vundle, to make a more powerful Plugin manager.
 Vivid's main goal is to become fully cross platform, so that it can work as expected on all systems and Vim derivatives, including Neovim and Windows.
 
 If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document] and ensure that you read and agree to the [Code of Conduct].
@@ -27,6 +27,8 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 * regenerates [help tags] after installing and updating.
 
 ![Vivid Update Screen](screenshots/vivid-shot-01.png) <!-- move to imgur -->
+
+---
 
 ## Quick Start
 
@@ -80,6 +82,10 @@ There are two main ways to install Vivid, default install, and Vundle emulation/
 #### Things that Vivid manages by default
 
 Vivid will change these [Vim] settings automatically to avoid errors from missing items in the ```$MYVIMRC```
+* ```syntax enable```
+* ```set nocompatible```
+* ```filetype off```
+* ```filetype plugin indent on```
 
 #### Vivid auto-install script
 
@@ -145,9 +151,9 @@ See the [changelog]
 
 To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!**
 
-* Vivid was developed and tested with [Vim] 8.0 on Linux
-* Vundle was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
-* Vivid follows the [KISS] principle, with a few exceptions which make it more
+* [Vivid] was developed and tested with [Vim] 8.0 on Linux
+* [Vundle] was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
+* [Vivid] follows the [KISS] principle, with a few exceptions which make it more
   powerful than any other vim plugin manager.
 
 
@@ -155,7 +161,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 
 
 ## TODO:
-[Vivid] is a fork of Vundle, this has resulted in it becoming a major work in progress.
+[Vivid] is a fork of [Vundle], this has resulted in it becoming a major work in progress.
 
 * [x] Restructure repository
 * [x] Restructure files
