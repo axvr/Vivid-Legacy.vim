@@ -54,15 +54,15 @@ more information.
 
                                                              *vivid-windows*
   If you are using Windows, see instructions on the Wiki
-  https://github.com/VividVim/Vivid.vim/wiki/Vivid-for-Windows.
+  https://github.com/axvr/Vivid.vim/wiki/Vivid-for-Windows.
 
                                                                  *vivid-faq*
   If you run into any issues, please consult the FAQ at
-  https://github.com/VividVim/Vivid.vim/wiki
+  https://github.com/axvr/Vivid.vim/wiki
 
 2. Setup Vivid:
 >
-  git clone https://github.com/VividVim/Vivid.vim.git ~/.vim/bundle/Vivid.vim
+  git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
 <
 3. Configure bundles:
 
@@ -79,7 +79,7 @@ more information.
     "call vivid#begin('~/some/path/here')
 
     " let Vivid manage Vivid, required
-    Plugin 'VividVim/Vivid.vim'
+    Plugin 'axvr/Vivid.vim'
 
     " The following are examples of different formats supported.
     " Keep Plugin commands between vivid#begin/end.
@@ -208,7 +208,7 @@ GitHub
 ------
 GitHub is used when a user/repo is passed to `Plugin`.
 >
-  Plugin 'VividVim/Vivid.vim' => https://github.com/VividVim/Vivid.vim
+  Plugin 'axvr/Vivid.vim' => https://github.com/axvr/Vivid.vim
 
 Vim Scripts
 -----------
@@ -384,7 +384,7 @@ KEY | DESCRIPTION
 
 =============================================================================
 7. VIVID INTERFACE CHANGE ~
-                        *vundle-interface-change* *:Bundle* *:BundleInstall!*
+                        *vivid-interface-change* *:Bundle* *:BundleInstall!*
                 *:BundleUpdate* *:BundleSearch* *:BundleList* *:BundleClean!*
                             *:VividInstall!* *:VividUpdate* *:VividSearch*
                                                 *:VividList* *:VividClean!*

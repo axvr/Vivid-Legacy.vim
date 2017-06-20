@@ -1,115 +1,147 @@
 # Vivid.vim
 
-**Vivid is the Next-Gen Vim Package Manager**
+**Vivid is the Next-Gen Vim Plugin Manager**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.7-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.8-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
 [![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid.vim/blob/master/LICENCE)
 
-Vivid is a fork of the Vundle Vim Plugin manager. Vivid aims to extend the
-features of Vundle, to make the most powerful Plugin manager, possible.
-Vivid's main goal is to become fully cross platform, so that it can work as
-expected on all systems and Vim derivatives, including Neovim and Windows.
+Vivid is a fork of the Vundle plugin manager for Vim. Vivid aims to extend and simplify the features of Vundle, to make a more powerful Plugin manager.
+Vivid's main goal is to become fully cross platform, so that it can work as expected on all systems and Vim derivatives, including Neovim and Windows.
 
-If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document](https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md) and ensure that you read and agree to the [Code of Conduct](https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md).
+If you find any bugs or errors, please feel free to submit an issue as I cannot test Vivid on every possible system for problems. I would in the future like to add multi-language support to Vivid, help would be greatly appreciated, especially since Google Translate is not entirely accurate a lot of the time. For more information on contributing to Vivid see the [contributing document] and ensure that you read and agree to the [Code of Conduct].
 
 ## About
 
 [Vivid] allows you to...
 
-* Configure your plugins right in your ``~/.vimrc``
-* Install configured plugins (a.k.a. scripts/bundle)
-* Update configured plugins
-* Clean unused plugins up
-* Run the above actions in a *single keypress* with interactive mode
+* Configure your plugins right from your ``$MYVIMRC``,
+* Install configured plugins (a.k.a. scripts/bundle),
+* Update configured plugins,
+* Clean up unused plugins,
+* Run the above actions in a *single keypress* with interactive mode.
 
 [Vivid] automatically...
 
-* manages the [runtime path] of your installed scripts
-* regenerates [help tags] after installing and updating
+* manages the [runtime path] of your installed scripts,
+* regenerates [help tags] after installing and updating.
 
-![Vivid Update Screen](screenshots/vivid-shot-01.png)
+![Vivid Update Screen](screenshots/vivid-shot-01.png) <!-- move to imgur -->
 
 ## Quick Start
 
-1. Vivid requires that [Git] and Curl are installed on your system
+### Dependencies
+
+Vivid requires that [Git] and Curl to be installed on your system, and [Vim] or [Neovim].
+
+### Install Vivid
+
+There are two main ways to install Vivid, default install, and Vundle emulation/replacement. Vivid has Vundle emulation support built into the core, this allows Vivid to act as a drop in replacement for Vundle.
+   
+1. To install Vivid the default way, place this at the very top of your ```$MYVIMRC```.
+
+   ```vim
+   " Example Vim Config File ($MYVIMRC)
+   " ==================================
+
+   " Brief help
+   " ----------
+   " :PluginList       - Lists all configured plugins
+   " :PluginUpdate     - Update all plugins to latest versions
+   " :PluginInstall    - Installs plugins; append `!` to update or just :PluginUpdate
+   " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
+   " :help vivid       - View documentation from within Vim
 
 
-2. Put this at the top of your ``~/.vimrc`` to use Vivid. Remove plugins you don't need (some of them will not work), they are for illustration purposes. It does not have to be stricly at the top, but if it isn't, then Vim will give errors and will take longer to open.
+   set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
+   call vivid#open()
+   " Input Plugins Below this Line
 
-    ```vim
-    " Example Vim Config File (~/.vimrc)
-    " ==================================
+     " The following are examples of different formats supported.
+     "Plugin 'tpope/vim-fugitive' " Plugin from GitHub
+     "Plugin 'git://git.wincent.com/command-t.git' " Git plugin not on GitHub
+     "Plugin 'file:///home/user/path/to/plugin' Local git plugins
+     "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} " Plugin is in a GitHub subdirectory
+     "Plugin 'ascenator/L9', {'name': 'newL9'} " Avoid naming confilics
 
-    " Brief help
-    " ----------
-    " :PluginList       - Lists all configured plugins
-    " :PluginUpdate     - Update all plugins to latest versions
-    " :PluginInstall    - Installs plugins; append `!` to update or just :PluginUpdate
-    " :PluginClean      - Remove unused plugins; append `!` to auto-approve removal
-    " :help vivid       - View documentation from within Vim
+   " Input Plugins Above this Line
+   call vivid#close()
 
+   " Continue Vimrc after this line
+   ```
 
-    " Auto Install Vivid and Plugins
-    let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
-    if (!filereadable(vivid_checkfile))
-      echo "Installing Vivid.vim & plugins"
-      silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
-      :source $MYVIMRC
-      :PluginInstall
-      :source $MYVIMRC
-      :q
-    endif
-
-    set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
-    call vivid#open()
-    " Input Plugins Below this Line
-
-      Plugin 'axvr/Vivid.vim' " let Vivid manage Vivid (Do not remove)
-
-      " The following are examples of different formats supported.
-      "Plugin 'tpope/vim-fugitive' " Plugin from GitHub
-      "Plugin 'git://git.wincent.com/command-t.git' " Git plugin not on GitHub
-      "Plugin 'file:///home/user/path/to/plugin' Local git plugins
-      "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'} " Plugin is in a GitHub subdirectory
-      "Plugin 'ascenator/L9', {'name': 'newL9'} " Avoid naming confilics
-
-    " Input Plugins Above this Line
-    call vivid#close()
-
-    " Continue Vimrc after this line
-    ```
-
-    This VimL will install all plugins already in the ``~/.vimrc`` file automatically,
-    when Vim is opened on a system which does not have Vivid.vim installed. This makes your
-    ``~/.vimrc`` file more portable , for use on other systems.
-
-    NOTE: To install plugins added after Vivid.vim is installed, see section 3:
-    Install Plugins. Seen below.
-
-    Shell Notes (If you don't know what this means, ignore this):
-
-    * Bash works out of the box.
-    * Zsh should work perfectly fine with Vivid.vim out of the box.
-    * For those using the fish shell: add ``set shell=/bin/bash`` to the top of your ``~/.vimrc``.
+   Then if you are on a UNIX based system run this command: ```git clone https://github.com/axvr/Vivid.vim ~/.vim/bundle/Vivid.vim``` This will download the latest version of Vivid. After completing that move to the section titled "[Using Vivid]".
+ 
+2. The second install method would be to replace Vundle with Vivid, you can do this by replacing ```set rtp+=~/.vim/bundle/Vundle.vim/``` with ```set rtp+=~/.vim/bundle/Vivid.vim/```, from your ```$MYVIMRC```. Then run ```git clone https://github.com/axvr/Vivid.vim ~/.vim/bundle/Vivid.vim```.
 
 
-3. Install Plugins:
+### Other things
 
-    Launch ``vim`` and run ``:PluginInstall``
+#### Things that Vivid manages by default
 
-    To install from command line: ``vim +PluginInstall +qall``
+Vivid will change these [Vim] settings automatically to avoid errors from missing items in the ```$MYVIMRC```
+
+#### Vivid auto-install script
+
+This can be placed at the top of a ```$MYVIMRC``` to install Vivid when on a UNIX based computer, which does not have Vivid installed already. This makes your ```$MYVIMRC``` file more portable, and allow for instant use on other systems.
+
+```vim
+" Auto Install Vivid and Plugins
+let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
+if (!filereadable(vivid_checkfile))
+  echo "Installing Vivid.vim & plugins"
+  silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
+  :source $MYVIMRC
+  :PluginInstall
+  :source $MYVIMRC
+  :q
+endif
+```
+
+#### Shell Notes 
+
+Shell notes (If you don't know what this means, ignore this):
+
+* Bash works out of the box,
+* Zsh should work perfectly fine with Vivid,
+* for those using Fish shell: add ``set shell=/bin/bash`` to the top of your ``$MYVIMRC``.
 
 
-4. Update Plugins:
+### Using Vivid and the $MYVIMRC file
 
-    Launch ``vim`` and run ``:PluginUpdate``
+#### Open $MYVIMRC
 
+Launch ```vim``` then run ```:edit $MYVIMRC```
+
+#### Load $MYVIMRC
+
+Close Vim and reopen it, or run ```:source $MYVIMRC```
+
+#### Install Plugins
+
+Launch ``vim`` and run ``:PluginInstall``
+
+To install from command line: ``vim +PluginInstall +qall``
+
+
+#### Update Plugins
+
+Launch ``vim`` and run ``:PluginUpdate``
+
+
+#### Remove Plugins
+
+Remove the plugin you wish to delete from your ```$MYVIMRC```, then run ```:source $MYVIMRC```, and finally: ```:PluginClean```
+
+
+#### View Documentation
 
 See the [``:help vivid``](https://github.com/axvr/Vivid.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
 
 See the [changelog]
 
+
+## Attribution
 
 To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!**
 
@@ -117,6 +149,10 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * Vundle was developed and tested with [Vim] 7.3 on OS X, Linux and Windows
 * Vivid follows the [KISS] principle, with a few exceptions which make it more
   powerful than any other vim plugin manager.
+
+
+---
+
 
 ## TODO:
 [Vivid] is a fork of Vundle, this has resulted in it becoming a major work in progress.
@@ -167,6 +203,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [Vundle]:https://github.com/VundleVim/Vundle.vim/
 [changelog]:https://github.com/axvr/Vivid.vim/blob/master/CHANGELOG.md/
 [Vim]:http://www.vim.org
+[Neovim]:https://neovim.io/
 [Git]:http://git-scm.com
 [``git clone``]:http://gitref.org/creating/#clone
 [KISS]:https://wikipedia.org/wiki/KISS_principle
@@ -176,62 +213,7 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
 [Vivid contributors]:https://github.com/axvr/Vivid.vim/graphs/contributors
 [in progress]:https://github.com/axvr/Vivid.vim/
+[Using Vivid]:https://github.com/axvr/Vivid.vim#using-vivid
+[Code of Conduct]:https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md
+[contributing document]:https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md
 
-<!--
-  Old Vundle Vimrc Example:
-   ```vim
-   set nocompatible              " be iMproved, required
-   filetype off                  " required
-
-   " set the runtime path to include Vundle and initialize
-   set rtp+=~/.vim/bundle/Vundle.vim
-   call vundle#begin()
-   " alternatively, pass a path where Vundle should install plugins
-   "call vundle#begin('~/some/path/here')
-
-   " let Vundle manage Vundle, required
-   Plugin 'VundleVim/Vundle.vim'
-
-   " The following are examples of different formats supported.
-   " Keep Plugin commands between vundle#begin/end.
-   " plugin on GitHub repo
-   Plugin 'tpope/vim-fugitive'
-   " plugin from http://vim-scripts.org/vim/scripts.html
-   " Plugin 'L9'
-   " Git plugin not hosted on GitHub
-   Plugin 'git://git.wincent.com/command-t.git'
-   " git repos on your local machine (i.e. when working on your own plugin)
-   Plugin 'file:///home/gmarik/path/to/plugin'
-   " The sparkup vim script is in a subdirectory of this repo called vim.
-   " Pass the path to set the runtimepath properly.
-   Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-   " Install L9 and avoid a Naming conflict if you've already installed a
-   " different version somewhere else.
-   " Plugin 'ascenator/L9', {'name': 'newL9'}
-
-   " All of your Plugins must be added before the following line
-   call vundle#end()            " required
-   filetype plugin indent on    " required
-   " To ignore plugin indent changes, instead use:
-   "filetype plugin on
-   "
-   " Brief help
-   " :PluginList       - lists configured plugins
-   " :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-   " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-   "
-   " see :h vundle for more details or wiki for FAQ
-   " Put your non-Plugin stuff after this line
-   ```
-
-
-  [Windows setup]:https://github.com/VundleVim/Vundle.vim/wiki/Vundle-for-Windows
-  [FAQ]:https://github.com/VundleVim/Vundle.vim/wiki
-  [Tips]:https://github.com/VundleVim/Vundle.vim/wiki/Tips-and-Tricks
-  [configure]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L126-L233
-  [install]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L234-L254
-  [update]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L255-L265
-  [clean]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L303-L318
-  [interactive mode]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L319-L360
-  [interface change]:https://github.com/VundleVim/Vundle.vim/blob/v0.10.2/doc/vundle.txt#L372-L396
--->

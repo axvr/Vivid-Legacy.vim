@@ -44,6 +44,20 @@ Leave 3 lines between previous change log item -->
 
 ---
 
+## [0.10.8] - 2017-06-20
+
+### Added
+* Allow Vivid to manage itself without the needing to be in the ```~/.vimrc```
+
+### Changed
+* Updated ```README.md``` to be more relevant to the latest version of Vivid
+* Updated test files to use the latest Vivid configurations
+
+### Fixed
+* Broken links in a couple of files
+
+
+
 ## [0.10.7] - 2017-06-19
 
 ### Added

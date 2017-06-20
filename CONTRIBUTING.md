@@ -54,9 +54,9 @@ Vimrc:
 set nocompatible
 syntax on
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
-Plugin 'VundleVim/Vundle.vim'
+set rtp+=~/.vim/bundle/Vivid.vim/
+call vivid#open()
+Plugin 'axvr/Vivid.vim'
 Plugin 'relevant/plugin'
 filetype plugin indent on
 

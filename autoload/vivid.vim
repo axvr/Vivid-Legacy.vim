@@ -3,7 +3,7 @@
 " Author:       Alex Vear
 " HomePage:     http://github.com/axvr/Vivid.vim
 " Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
-" Version:      0.10.7
+" Version:      0.10.8
 " =================================================================================
 
 
@@ -24,8 +24,10 @@ command! -nargs=0         PluginDocs
 \ call vivid#installer#helptags(g:vivid#bundles)
 
 " Aliases
-command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate PluginInstall! <args>
+command! -nargs=* -complete=custom,vivid#scripts#complete PluginUpdate
+\ PluginInstall! <args>
 
+" -------------------------------------------------------------------------------
 
 " Set up Vivid.  This function has to be called from the users vimrc file.
 " This will force Vim to source this file as a side effect which wil define
@@ -45,6 +47,7 @@ function! vivid#finish() abort
   filetype plugin indent on
 endfunction
 
+" -------------------------------------------------------------------------------
 
 " Alternative to vivid#rc, offers speed up by modifying rtp (RunTimePath) only when end()
 " called later.
@@ -59,6 +62,8 @@ function! vivid#open(...) abort
   endif
   call vivid#config#init()
 
+  call vivid#defaultPlugins()
+
 endfunction
 
 " Finishes appending plugins to the rtp.
@@ -69,6 +74,13 @@ function! vivid#close(...) abort
 endfunction
 
 
+" Default plugins to be managed
+function! vivid#defaultPlugins() abort
+  call vivid#config#bundle('axvr/Vivid.vim')
+endfunction
+
+" -------------------------------------------------------------------------------
+
 function! vivid#defineVars()
   " Initialize some global variables used by Vivid.
   let g:vivid#bundle_dir = expand('$HOME/.vim/bundle', 1)
@@ -78,6 +90,7 @@ function! vivid#defineVars()
   let g:vivid#updated_bundles = []
 endfunction
 
+" -------------------------------------------------------------------------------
 
 " Set up the signs used in the installer window. (See :help signs)
 if (has('signs'))
