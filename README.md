@@ -34,7 +34,7 @@ If you find any bugs or errors, please feel free to submit an issue as I cannot 
 
 ### Dependencies
 
-Vivid requires that [Git] and Curl to be installed on your system, and [Vim] or [Neovim].
+Vivid requires that [Git] and Curl are installed on your system, and [Vim] or [Neovim].
 
 ### Install Vivid
 
@@ -169,24 +169,20 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [x] Rename components
 * [x] Remove redundant code
 * [x] Improve human readability of source
-* [ ] Add full Neovim support ([in progress])
-* [ ] Replace and modernise the old Vundle base ([in progress])
-* [ ] Speed up and optimise the plugin manager ([in progress])
+* [ ] Possibly add additional Neovim asynchronous plugin management
+* [ ] Speed up and optimise the Vundle base ([in progress])
 * [ ] Fix the bugs in Vundle base
 * [x] Vundle backwards compatibility via emulation
-* [ ] Improve Windows support ([in progress])
-* [ ] Add GitLab support (maybe add BitBucket support) ([in progress])
-* [ ] Add update and install progress bar (for YCM especially)
-* [ ] Add support for switching and testing between http:// git:// & https:// ([in progress])
-* [ ] Add support for Mercurial repos ([in progress])
+* [ ] Improve Windows support
+* [ ] Maybe add update and install progress bar (for YCM especially)
+* [ ] Add support for switching and testing between http:// git:// & https://
 * [x] Increase security and mitigate MITM attacks
 * [ ] Allow users to choose to update using latest commit or tag ([in progress])
-* [x] Comment all of the code ([in progress])
+* [x] Comment all of the code
 * [ ] Improve documentation ([in progress])
-* [ ] Add multi-language support
+* [ ] Possibly add multi-language support
 * [x] Disconnect from Vundle upstream
-* [ ] Fix plugin repo deletion bug where credentials are required ([in progress])
-* [x] Make a Github 'organisation' for contributers to join & get commit access
+* [ ] Fix plugin repo not existing bug where credentials are required ([in progress])
 * [x] Replace old README and vim help menu
 * [x] Improve the test files from Vundle
 * [x] Attempt to use ``https`` before ``http``
