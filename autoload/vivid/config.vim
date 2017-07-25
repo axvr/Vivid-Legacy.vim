@@ -140,15 +140,15 @@ function! s:parse_name(arg)
   let git_proto = exists('g:vivid_default_git_proto') ? g:vivid_default_git_proto : 'https'
 
   if    arg =~? '^\s*\(gh\|github\):\S\+'
-  \  || arg =~? '^[a-z0-9][a-z0-9-]*/[^/]\+$'
+        \  || arg =~? '^[a-z0-9][a-z0-9-]*/[^/]\+$'
     let uri = git_proto.'://github.com/'.split(arg, ':')[-1]
     if uri !~? '\.git$'
       let uri .= '.git'
     endif
     let name = substitute(split(uri,'\/')[-1], '\.git\s*$','','i')
   elseif arg =~? '^\s*\(git@\|git://\)\S\+'
-  \   || arg =~? '\(file\|https\?\)://'
-  \   || arg =~? '\.git\s*$'
+        \   || arg =~? '\(file\|https\?\)://'
+        \   || arg =~? '\.git\s*$'
     let uri = arg
     let name = split( substitute(uri,'/\?\.git\s*$','','i') ,'\/')[-1]
   else

@@ -148,16 +148,16 @@ function! vivid#scripts#view(title, headers, results)
   syntax keyword vimCommand Helptags
 
   command!  -buffer -bang -nargs=1 DeletePlugin
-    \ call vivid#installer#run('vivid#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
+        \ call vivid#installer#run('vivid#installer#delete', split(<q-args>,',')[0], ['!' == '<bang>', <args>])
 
   command!  -buffer -bang -nargs=? InstallAndRequirePlugin
-    \ call vivid#installer#run('vivid#installer#install_and_require', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
+        \ call vivid#installer#run('vivid#installer#install_and_require', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
   command!  -buffer -bang -nargs=? InstallPlugin
-    \ call vivid#installer#run('vivid#installer#install', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
+        \ call vivid#installer#run('vivid#installer#install', split(<q-args>,',')[0], ['!' == '<bang>', <q-args>])
 
   command!  -buffer -bang -nargs=0 InstallHelptags
-    \ call vivid#installer#run('vivid#installer#docs', 'helptags', [])
+        \ call vivid#installer#run('vivid#installer#docs', 'helptags', [])
 
   command!  -buffer -nargs=0 VividLog call s:view_log()
 

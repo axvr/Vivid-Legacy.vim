@@ -10,10 +10,10 @@ function! vivid#installer#new(bang, ...) abort
   " No specific plugins are specified. Operate on all plugins.
   if a:0 == 0
     let bundles = g:vivid#bundles
-  " Specific plugins are specified for update. Update them.
+    " Specific plugins are specified for update. Update them.
   elseif (a:bang)
     let bundles = filter(copy(g:vivid#bundles), 'index(a:000, v:val.name) > -1')
-  " Specific plugins are specified for installation. Install them.
+    " Specific plugins are specified for installation. Install them.
   else
     let bundles = map(copy(a:000), 'vivid#config#bundle(v:val, {})')
   endif
@@ -187,7 +187,7 @@ endfunction
 function! vivid#installer#docs() abort
   let error_count = vivid#installer#helptags(g:vivid#bundles)
   if error_count > 0
-      return 'error'
+    return 'error'
   endif
   return 'helptags'
 endfunction
@@ -226,8 +226,8 @@ endfunction
 function! vivid#installer#clean(bang) abort
   let bundle_dirs = map(copy(g:vivid#bundles), 'v:val.path()')
   let all_dirs = (v:version > 702 || (v:version == 702 && has("patch51")))
-  \   ? split(globpath(g:vivid#bundle_dir, '*', 1), "\n")
-  \   : split(globpath(g:vivid#bundle_dir, '*'), "\n")
+        \   ? split(globpath(g:vivid#bundle_dir, '*', 1), "\n")
+        \   : split(globpath(g:vivid#bundle_dir, '*'), "\n")
   let x_dirs = filter(all_dirs, '0 > index(bundle_dirs, v:val)')
 
   if empty(x_dirs)
@@ -265,8 +265,8 @@ endfunction
 function! vivid#installer#delete(bang, dir_name) abort
 
   let cmd = ((has('win32') || has('win64')) && empty(matchstr(&shell, 'sh'))) ?
-  \           'rmdir /S /Q' :
-  \           'rm -rf'
+        \           'rmdir /S /Q' :
+        \           'rm -rf'
 
   let bundle = vivid#config#init_bundle(a:dir_name, {})
   let cmd .= ' '.vivid#installer#shellesc(bundle.path())
@@ -294,10 +294,10 @@ endfunction
 " ---------------------------------------------------------------------------
 function! s:has_doc(rtp) abort
   return isdirectory(a:rtp.'/doc')
-  \   && (!filereadable(a:rtp.'/doc/tags') || filewritable(a:rtp.'/doc/tags'))
-  \   && (v:version > 702 || (v:version == 702 && has("patch51")))
-  \     ? !(empty(glob(a:rtp.'/doc/*.txt', 1)) && empty(glob(a:rtp.'/doc/*.??x', 1)))
-  \     : !(empty(glob(a:rtp.'/doc/*.txt')) && empty(glob(a:rtp.'/doc/*.??x')))
+        \   && (!filereadable(a:rtp.'/doc/tags') || filewritable(a:rtp.'/doc/tags'))
+        \   && (v:version > 702 || (v:version == 702 && has("patch51")))
+        \     ? !(empty(glob(a:rtp.'/doc/*.txt', 1)) && empty(glob(a:rtp.'/doc/*.??x', 1)))
+        \     : !(empty(glob(a:rtp.'/doc/*.txt')) && empty(glob(a:rtp.'/doc/*.??x')))
 endfunction
 
 
@@ -374,12 +374,12 @@ function! s:make_sync_command(bang, bundle) abort
       call s:log('>  Plugin ' . a:bundle.name . ' new URI: ' . a:bundle.uri)
       " Directory names match but the origin remotes are not the same
       let cmd_parts = [
-                  \ 'cd '.vivid#installer#shellesc(a:bundle.path()) ,
-                  \ 'git remote set-url origin ' . vivid#installer#shellesc(a:bundle.uri),
-                  \ 'git fetch',
-                  \ 'git reset --hard origin/HEAD',
-                  \ 'git submodule update --init --recursive',
-                  \ ]
+            \ 'cd '.vivid#installer#shellesc(a:bundle.path()) ,
+            \ 'git remote set-url origin ' . vivid#installer#shellesc(a:bundle.uri),
+            \ 'git fetch',
+            \ 'git reset --hard origin/HEAD',
+            \ 'git submodule update --init --recursive',
+            \ ]
       let cmd = join(cmd_parts, ' && ')
       let cmd = vivid#installer#shellesc_cd(cmd)
       let initial_sha = ''
@@ -392,10 +392,10 @@ function! s:make_sync_command(bang, bundle) abort
     endif
 
     let cmd_parts = [
-                \ 'cd '.vivid#installer#shellesc(a:bundle.path()),
-                \ 'git pull',
-                \ 'git submodule update --init --recursive',
-                \ ]
+          \ 'cd '.vivid#installer#shellesc(a:bundle.path()),
+          \ 'git pull',
+          \ 'git submodule update --init --recursive',
+          \ ]
     let cmd = join(cmd_parts, ' && ')
     let cmd = vivid#installer#shellesc_cd(cmd)
 
@@ -429,7 +429,7 @@ function! s:sync(bang, bundle) abort
 
   let [ cmd, initial_sha ] = s:make_sync_command(a:bang, a:bundle)
   if empty(cmd)
-      return 'todate'
+    return 'todate'
   endif
 
   let out = s:system(cmd)
