@@ -1,9 +1,9 @@
 " =================================================================================
-" Name:         Vivid.vim
+" Name:         Vivid-Legacy.vim
 " Author:       Alex Vear
-" HomePage:     http://github.com/axvr/Vivid.vim
-" Readme:       http://github.com/axvr/Vivid.vim/blob/master/README.md
-" Version:      0.10.8
+" HomePage:     http://github.com/axvr/Vivid-Legacy.vim
+" Readme:       http://github.com/axvr/Vivid-Legacy.vim/blob/master/README.md
+" Version:      0.10.9
 " =================================================================================
 
 
@@ -76,7 +76,7 @@ endfunction
 
 " Default plugins to be managed
 function! vivid#defaultPlugins() abort
-    call vivid#config#bundle('axvr/Vivid.vim')
+    call vivid#config#bundle('axvr/Vivid-Legacy.vim')
 endfunction
 
 " -------------------------------------------------------------------------------

@@ -1,10 +1,10 @@
-# Vivid.vim
+# Vivid-Legacy.vim
 
-**Vivid is the Next-Gen Vim Plugin Manager**
+**Vivid-Legacy is now legacy software, please use the new version instead: [Vivid.vim](https://github.com/axvr/Vivid.vim)**
 
 <!-- Badges made using https://shields.io/ -->
-[![Version Badge](https://img.shields.io/badge/Version-v0.10.8-brightgreen.svg)](https://github.com/axvr/Vivid.vim/releases)
-[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid.vim/blob/master/LICENCE)
+[![Version Badge](https://img.shields.io/badge/Version-v0.10.9-brightgreen.svg)](https://github.com/axvr/Vivid-Legacy.vim/releases)
+[![Licence Badge](https://img.shields.io/badge/Licence-MIT-blue.svg)](https://github.com/axvr/Vivid-Legacy.vim/blob/master/LICENCE)
 
 [Vivid] is a fork of [Vundle] a [Vim] plugin manager. Vivid aims to extend and simplify the features of Vundle, to make a more powerful Plugin manager.
 Vivid's main goal is to become fully cross platform, so that it can work as expected on all systems and Vim derivatives, including Neovim and Windows.
@@ -39,7 +39,7 @@ Vivid requires that [Git] and Curl are installed on your system, and [Vim] or [N
 ### Install Vivid
 
 There are two main ways to install Vivid, default install, and Vundle emulation/replacement. Vivid has Vundle emulation support built into the core, this allows Vivid to act as a drop in replacement for Vundle.
-   
+
 1. To install Vivid the default way, place this at the very top of your ```$MYVIMRC```.
 
    ```vim
@@ -55,7 +55,7 @@ There are two main ways to install Vivid, default install, and Vundle emulation/
    " :help vivid       - View documentation from within Vim
 
 
-   set rtp+=~/.vim/bundle/Vivid.vim/ " Append Vivid to the runtimepath
+   set rtp+=~/.vim/bundle/Vivid-Legacy.vim/ " Append Vivid to the runtimepath
    call vivid#open()
    " Input Plugins Below this Line
 
@@ -72,9 +72,9 @@ There are two main ways to install Vivid, default install, and Vundle emulation/
    " Continue Vimrc after this line
    ```
 
-   Then if you are on a UNIX based system run this command: ```git clone https://github.com/axvr/Vivid.vim ~/.vim/bundle/Vivid.vim``` This will download the latest version of Vivid. After completing that move to the section titled "[Using Vivid]".
- 
-2. The second install method would be to replace Vundle with Vivid, you can do this by replacing ```set rtp+=~/.vim/bundle/Vundle.vim/``` with ```set rtp+=~/.vim/bundle/Vivid.vim/```, from your ```$MYVIMRC```. Then run ```git clone https://github.com/axvr/Vivid.vim ~/.vim/bundle/Vivid.vim```.
+   Then if you are on a UNIX based system run this command: ```git clone https://github.com/axvr/Vivid-Legacy.vim ~/.vim/bundle/Vivid-Legacy.vim``` This will download the latest version of Vivid. After completing that move to the section titled "[Using Vivid]".
+
+2. The second install method would be to replace Vundle with Vivid, you can do this by replacing ```set rtp+=~/.vim/bundle/Vundle.vim/``` with ```set rtp+=~/.vim/bundle/Vivid-Legacy.vim/```, from your ```$MYVIMRC```. Then run ```git clone https://github.com/axvr/Vivid-Legacy.vim ~/.vim/bundle/Vivid-Legacy.vim```.
 
 
 ### Other things
@@ -93,10 +93,10 @@ This can be placed at the top of a ```$MYVIMRC``` to install Vivid when on a UNI
 
 ```vim
 " Auto Install Vivid and Plugins
-let vivid_checkfile=expand('~/.vim/bundle/Vivid.vim/test-files/checkfile.txt')
+let vivid_checkfile=expand('~/.vim/bundle/Vivid-Legacy.vim/test-files/checkfile.txt')
 if (!filereadable(vivid_checkfile))
-  echo "Installing Vivid.vim & plugins"
-  silent !git clone https://github.com/axvr/Vivid.vim.git ~/.vim/bundle/Vivid.vim
+  echo "Installing Vivid-Legacy.vim & plugins"
+  silent !git clone https://github.com/axvr/Vivid-Legacy.vim.git ~/.vim/bundle/Vivid-Legacy.vim
   :source $MYVIMRC
   :PluginInstall
   :source $MYVIMRC
@@ -104,7 +104,7 @@ if (!filereadable(vivid_checkfile))
 endif
 ```
 
-#### Shell Notes 
+#### Shell Notes
 
 Shell notes (If you don't know what this means, ignore this):
 
@@ -142,7 +142,7 @@ Remove the plugin you wish to delete from your ```$MYVIMRC```, then run ```:sour
 
 #### View Documentation
 
-See the [``:help vivid``](https://github.com/axvr/Vivid.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
+See the [``:help vivid``](https://github.com/axvr/Vivid-Legacy.vim/blob/master/doc/vivid.txt) Vimdoc for more details.
 
 See the [changelog]
 
@@ -201,9 +201,9 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 * [ ] And many more things
 
 
-[Vivid]:https://github.com/axvr/Vivid.vim/
+[Vivid]:https://github.com/axvr/Vivid-Legacy.vim/
 [Vundle]:https://github.com/VundleVim/Vundle.vim/
-[changelog]:https://github.com/axvr/Vivid.vim/blob/master/CHANGELOG.md/
+[changelog]:https://github.com/axvr/Vivid-Legacy.vim/blob/master/CHANGELOG.md/
 [Vim]:http://www.vim.org
 [Neovim]:https://neovim.io/
 [Git]:http://git-scm.com
@@ -213,9 +213,9 @@ To all of the [Vundle contributors], and the [Vivid contributors],  **Thank you!
 [help tags]:http://vimdoc.sourceforge.net/htmldoc/helphelp.html#:helptags
 [runtime path]:http://vimdoc.sourceforge.net/htmldoc/options.html#%27runtimepath%27
 [Vundle contributors]:https://github.com/VundleVim/Vundle.vim/graphs/contributors
-[Vivid contributors]:https://github.com/axvr/Vivid.vim/graphs/contributors
-[in progress]:https://github.com/axvr/Vivid.vim/
-[Using Vivid]:https://github.com/axvr/Vivid.vim#using-vivid-and-the-myvimrc-file
-[Code of Conduct]:https://github.com/axvr/Vivid.vim/blob/master/CODE_OF_CONDUCT.md
-[contributing document]:https://github.com/axvr/Vivid.vim/blob/master/CONTRIBUTING.md
+[Vivid contributors]:https://github.com/axvr/Vivid-Legacy.vim/graphs/contributors
+[in progress]:https://github.com/axvr/Vivid-Legacy.vim/
+[Using Vivid]:https://github.com/axvr/Vivid-Legacy.vim#using-vivid-and-the-myvimrc-file
+[Code of Conduct]:https://github.com/axvr/Vivid-Legacy.vim/blob/master/CODE_OF_CONDUCT.md
+[contributing document]:https://github.com/axvr/Vivid-Legacy.vim/blob/master/CONTRIBUTING.md
 

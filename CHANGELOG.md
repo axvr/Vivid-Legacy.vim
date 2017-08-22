@@ -2,7 +2,7 @@
 
 History of all of the changes made to this project
 
-This project is licenced under the [MIT Licence](https://github.com/axvr/Vivid.vim/blob/master/LICENCE).
+This project is licenced under the [MIT Licence](https://github.com/axvr/Vivid-Legacy.vim/blob/master/LICENCE).
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and it also adheres to [Semantic Versioning](http://semver.org/).
 
@@ -43,6 +43,15 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and it als
 Leave 3 lines between previous change log item -->
 
 ---
+
+## [0.10.9] - 2017-08-22
+
+### Changed
+* Vivid-Legacy.vim is now legacy software. Most links have been changed to fit the new address
+* Vivid.vim link added to README as well as a message regarding to transition to legacy software
+* Extended Vundle emulation
+
+
 
 ## [0.10.8] - 2017-06-20
 
