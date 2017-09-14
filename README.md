@@ -1,6 +1,6 @@
 # Vivid-Legacy.vim
 
-**Vivid-Legacy is now legacy software, please use the new version instead: [Vivid.vim](https://github.com/axvr/Vivid.vim)**
+**Vivid-Legacy is now legacy software, please use the new version (full rewrite) instead: [Vivid.vim](https://github.com/axvr/Vivid.vim)**
 
 <!-- Badges made using https://shields.io/ -->
 [![Version Badge](https://img.shields.io/badge/Version-v0.10.9-brightgreen.svg)](https://github.com/axvr/Vivid-Legacy.vim/releases)
